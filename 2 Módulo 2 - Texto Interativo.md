@@ -286,23 +286,6 @@ Se precisar utilizar uma rede de um aeroporto, shopping, biblioteca ou cafeteria
 
 <img width="1200" height="628" alt="image" src="https://github.com/user-attachments/assets/2dd66424-2ef8-4bad-a927-f125e486cd05" />
 
-# 🚨 Bônus — O que fazer se você suspeitar de um ataque?
-
-Mesmo adotando medidas preventivas, ainda existe a possibilidade de enfrentar um incidente de segurança.
-
-Se você suspeitar que seu computador foi comprometido:
-
-1. **Não entre em pânico.** Evite tomar decisões precipitadas ou pagar valores exigidos por mensagens suspeitas.
-2. **Interrompa atividades de risco.** Se houver suspeita de infecção ativa, desconecte o computador da rede quando apropriado.
-3. **Não forneça mais informações.** Evite digitar senhas ou acessar contas sensíveis pelo dispositivo possivelmente comprometido.
-4. **Procure ajuda confiável.** Utilize suporte técnico qualificado ou os canais oficiais do serviço afetado.
-5. **Proteja suas contas.** A partir de um dispositivo seguro, altere as senhas comprometidas e encerre sessões desconhecidas.
-6. **Verifique seus arquivos.** Utilize ferramentas de segurança confiáveis e recupere dados a partir de backups seguros, quando necessário.
-
-**⚠️ Atenção:** se o computador apresentar sinais de ransomware, evite apagar arquivos ou reinstalar o sistema antes de avaliar as opções de recuperação. Preserve as evidências relevantes e procure suporte técnico especializado.
-
----
-
 # 📚 Materiais complementares
 
 Para aprofundar seus conhecimentos, consulte os recursos oficiais abaixo:
