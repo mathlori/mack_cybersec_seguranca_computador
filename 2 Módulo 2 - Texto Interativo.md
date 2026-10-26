@@ -329,7 +329,3 @@ Você não precisa ser especialista em informática para começar a se proteger.
 **Sua segurança digital também depende das suas escolhas!**
 
 ---
-
-> **Projeto de Extensão — Segurança Digital**
->
-> Material educativo elaborado para promover a conscientização sobre segurança no computador e incentivar boas práticas de proteção digital.
