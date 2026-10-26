@@ -9,7 +9,7 @@
 
 ## 📢 Introdução
 
-Agora que você já conhece alguns dos principais riscos ao utilizar computador, precisamos saber como prevenir cada um deles.
+Agora que você já conhece alguns dos principais riscos ao utilizar computador, precisamos saber como prevenir esses ataques.
 
 Afinal, um simples clique para acessar uma página ou baixar um arquivo pode causar sérios danos a suas finanças, reputação ou aos seus dados.
 
