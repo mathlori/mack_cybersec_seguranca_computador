@@ -155,7 +155,7 @@ A trilha foi estruturada para conduzir o participante desde a compreensão dos c
 | 1. Conhecer | Compreender os principais riscos digitais. | 🎬 Vídeo curto | 📋 Planejado |
 | 2. Aprender | Conhecer boas práticas de proteção. | 📖 Texto educativo | ✅ Concluído |
 | 3. Reconhecer | Analisar situações reais de risco. | 🧩 Caso prático | ✅ Concluído |
-| 4. Praticar | Identificar ameaças e propor soluções. | 🎯 Desafio | ⏳ Em desenvolvimento |
+| 4. Praticar | Identificar ameaças e propor soluções. | 🎯 Desafio | ✅ Concluído |
 | 5. Avaliar | Verificar os conhecimentos adquiridos. | 📝 Quiz | ⏳ Em desenvolvimento |
 | 6. Aplicar | Incorporar hábitos seguros à rotina. | ☑️ Checklist | ⏳ Em desenvolvimento |
 | 7. Consultar | Aprender a reagir a incidentes de segurança. | 🚨 Guia rápido | ⏳ Em desenvolvimento |
