@@ -30,7 +30,7 @@ Este repositório reúne os materiais educativos desenvolvidos para uma trilha d
 ## 🎬 1. Vídeo curto — "Como proteger seu computador em 5 minutos"
 
 - **Formato:** Vídeo educativo de 3 a 5 minutos.
-- **Status:** ⏳ Em desenvolvimento.
+- **Status:** 📋 Planejado.
 
 **📝 Conteúdo:**
 
@@ -54,6 +54,7 @@ Orientações sobre práticas fundamentais de segurança digital, incluindo:
 - 💾 Realização periódica de cópias de segurança (*backups*).
 - 📶 Cuidados ao utilizar redes Wi-Fi públicas.
 - 🔗 Identificação de links e anexos suspeitos.
+- 💪 Utilização de geradores de senhas
 
 ---
 
