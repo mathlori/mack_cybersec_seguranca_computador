@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#a6192e">
+	<title>Módulo 4 | Identificando e Solucionando Ameaças</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--red: #a6192e;
+			--red-dark: #741326;
+			--red-pale: #fae9ec;
+			--ink: #272324;
+			--muted: #6f6869;
+			--line: #e7dfe0;
+			--green: #176b48;
+			--green-pale: #e8f4ed;
+		}
+
+		* { box-sizing: border-box; }
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: radial-gradient(ellipse at 8% 12%, #f8e8e9 0, transparent 34rem), #fffdfc;
+			font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+			line-height: 1.55;
+		}
+
+		button, input { font: inherit; }
+		button { cursor: pointer; }
+		[hidden] { display: none !important; }
+
+		.topbar {
+			min-height: 66px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 18px;
+			padding: 12px clamp(18px, 5vw, 72px);
+			border-bottom: 4px solid var(--red-dark);
+			color: #fff;
+			background: var(--red);
+		}
+
+		.brand, .topbar-note { display: flex; align-items: center; gap: 10px; }
+		.brand { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+		.brand-mark { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid #ffffff9c; border-radius: 50%; }
+		.topbar-note { font-size: 12px; font-weight: 700; }
+
+		main { width: min(1120px, calc(100% - 36px)); margin: 0 auto; padding: 44px 0 60px; }
+		.intro { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 28px; }
+		.eyebrow { margin: 0 0 9px; color: var(--red); font-size: 12px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+		h1, h2, h3, p { margin-top: 0; }
+		h1 { max-width: 750px; margin-bottom: 11px; font: 500 clamp(34px, 5vw, 55px)/1.04 Georgia, "Times New Roman", serif; }
+		.intro-copy { max-width: 700px; margin: 0; color: var(--muted); font-size: 16px; }
+		.module-stamp { flex: 0 0 auto; padding: 10px 14px; border-left: 2px solid var(--red); color: var(--muted); font-size: 12px; }
+		.module-stamp strong { display: block; color: var(--ink); font-size: 14px; }
+
+		.challenge-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 28px 0 15px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 5px; background: #fff; }
+		.challenge-bar strong { font-size: 13px; }
+		.challenge-bar output { color: var(--red-dark); font-size: 13px; font-weight: 800; text-align: right; }
+
+		.scenario-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+		.scenario-card { min-width: 0; padding: 20px; border: 1px solid var(--line); border-top: 3px solid var(--red); border-radius: 6px; background: #fff; box-shadow: 0 8px 24px #44121c0b; }
+		.scenario-head { display: flex; align-items: center; gap: 12px; margin-bottom: 13px; }
+		.scenario-icon { width: 42px; height: 42px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 5px; color: var(--red-dark); background: var(--red-pale); }
+		.scenario-label { margin: 0 0 2px; color: var(--red); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+		.scenario-head h2 { margin: 0; font-size: 17px; line-height: 1.25; }
+		.situation { min-height: 84px; margin-bottom: 14px; padding: 12px 13px; border-left: 2px solid #d6a0a8; color: #494243; background: #fffafb; font-size: 13px; }
+		.situation strong { color: var(--ink); }
+		.scenario-card fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+		.scenario-card legend { margin-bottom: 9px; font-size: 13px; font-weight: 800; }
+		.options { display: grid; gap: 7px; }
+		.option { display: flex; align-items: flex-start; gap: 9px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 4px; color: #393435; cursor: pointer; font-size: 12px; line-height: 1.45; }
+		.option:hover { border-color: #c8838e; background: #fffafb; }
+		.option input { width: 16px; height: 16px; flex: 0 0 auto; margin: 1px 0 0; accent-color: var(--red); }
+		.check-button { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; padding: 9px 12px; border: 0; border-radius: 4px; color: #fff; background: var(--red); font-size: 12px; font-weight: 800; }
+		.check-button:hover { background: var(--red-dark); }
+		.check-button:focus-visible, .option:focus-within { outline: 3px solid #d99ba5; outline-offset: 2px; }
+		.feedback { margin: 11px 0 0; padding: 10px 12px; border-left: 3px solid var(--green); color: #174c37; background: var(--green-pale); font-size: 12px; }
+		.feedback.is-incorrect { border-color: var(--red); color: var(--red-dark); background: var(--red-pale); }
+		.feedback strong { display: block; margin-bottom: 3px; }
+
+		.response-guide { display: grid; grid-template-columns: 42px 1fr; gap: 13px; margin-top: 26px; padding: 20px 22px; border-radius: 6px; color: #fff; background: var(--red-dark); }
+		.response-icon { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid #ffffff5c; border-radius: 50%; }
+		.response-guide h2 { margin: 0 0 5px; font: 500 22px/1.2 Georgia, "Times New Roman", serif; }
+		.response-guide p { margin: 0; color: #fff1f3; font-size: 13px; }
+		.recovery { margin-top: 14px; border: 1px solid var(--line); border-radius: 5px; background: #fff; }
+		.recovery summary { padding: 13px 16px; color: var(--red-dark); cursor: pointer; font-size: 13px; font-weight: 800; }
+		.recovery p { margin: 0; padding: 0 16px 15px; color: var(--muted); font-size: 13px; }
+		footer { padding: 17px 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; text-align: center; }
+
+		@media (max-width: 760px) {
+			main { padding-top: 32px; }
+			.intro { display: grid; gap: 14px; }
+			.module-stamp { justify-self: start; }
+			.scenario-grid { grid-template-columns: 1fr; }
+			.situation { min-height: auto; }
+		}
+
+		@media (max-width: 440px) {
+			.topbar { align-items: flex-start; }
+			.brand { font-size: 11px; }
+			.topbar-note { font-size: 10px; }
+			.challenge-bar { align-items: flex-start; flex-direction: column; gap: 4px; }
+			.challenge-bar output { text-align: left; }
+			.scenario-card { padding: 16px; }
+			.response-guide { grid-template-columns: 1fr; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+		}
+	</style>
+</head>
+<body>
+	<header class="topbar">
+		<div class="brand">
+			<span class="brand-mark" aria-hidden="true">
+				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 5 6v5c0 4.5 2.9 8.2 7 10 4.1-1.8 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+			</span>
+			Trilha de segurança digital
+		</div>
+		<div class="topbar-note">
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg>
+			Desafio prático
+		</div>
+	</header>
+
+	<main>
+		<section class="intro" aria-labelledby="page-title">
+			<div>
+				<p class="eyebrow">Módulo 4 · Identifique e previna</p>
+				<h1 id="page-title">Identificando e Solucionando Ameaças</h1>
+				<p class="intro-copy">Leia cada situação, reconheça o risco e escolha uma medida preventiva. Cada resposta combina o problema com uma forma mais segura de agir.</p>
+			</div>
+			<div class="module-stamp"><strong>5 situações</strong>Responda no seu ritmo</div>
+		</section>
+
+		<div class="challenge-bar">
+			<strong>Seu progresso</strong>
+			<output id="progress" aria-live="polite">0 de 5 situações respondidas · 0 acertos</output>
+		</div>
+
+		<section class="scenario-grid" aria-label="Situações de segurança para análise">
+			<article class="scenario-card" data-answer="phishing">
+				<div class="scenario-head">
+					<span class="scenario-icon" aria-hidden="true">
+						<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/><path d="M17 3h4v4"/></svg>
+					</span>
+					<div><p class="scenario-label">Situação 01</p><h2>Link inesperado</h2></div>
+				</div>
+				<p class="situation">Você recebe uma mensagem: <strong>“Sua conta será bloqueada hoje. Acesse este link para confirmar seus dados.”</strong> O endereço parece diferente do site oficial.</p>
+				<form class="scenario-form" data-id="link">
+					<fieldset>
+						<legend>Qual é o risco e como agir?</legend>
+						<div class="options">
+							<label class="option"><input type="radio" name="link" value="phishing" required>É uma tentativa de phishing. Não clique; acesse a conta pelo aplicativo ou endereço oficial e confirme por um canal conhecido.</label>
+							<label class="option"><input type="radio" name="link" value="https">É confiável se a página tiver cadeado. Abra o link e confira seus dados.</label>
+							<label class="option"><input type="radio" name="link" value="reply">Basta responder à mensagem perguntando se ela é verdadeira.</label>
+						</div>
+					</fieldset>
+					<button class="check-button" type="submit">Conferir resposta</button>
+					<div class="feedback" role="status" aria-live="polite" hidden></div>
+				</form>
+			</article>
+
+			<article class="scenario-card" data-answer="usb">
+				<div class="scenario-head">
+					<span class="scenario-icon" aria-hidden="true">
+						<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 4h8v5H8zM9 9v10h6V9M11 19v2h2v-2M10 6h4"/><path d="M12 3V1m0 0-2 2m2-2 2 2"/></svg>
+					</span>
+					<div><p class="scenario-label">Situação 02</p><h2>Pendrive desconhecido</h2></div>
+				</div>
+				<p class="situation">Você encontra um pendrive sem identificação em uma sala. Para descobrir quem é o dono, pensa em conectá-lo ao computador.</p>
+				<form class="scenario-form" data-id="usb">
+					<fieldset>
+						<legend>Qual é o risco e como agir?</legend>
+						<div class="options">
+							<label class="option"><input type="radio" name="usb" value="usb" required>Ele pode conter arquivos maliciosos. Não conecte; entregue o dispositivo à equipe responsável ou ao suporte de TI.</label>
+							<label class="option"><input type="radio" name="usb" value="scan">Conecte e abra os arquivos, desde que não execute programas.</label>
+							<label class="option"><input type="radio" name="usb" value="personal">Use em um computador pessoal, que não tem arquivos importantes.</label>
+						</div>
+					</fieldset>
+					<button class="check-button" type="submit">Conferir resposta</button>
+					<div class="feedback" role="status" aria-live="polite" hidden></div>
+				</form>
+			</article>
+
+			<article class="scenario-card" data-answer="piracy">
+				<div class="scenario-head">
+					<span class="scenario-icon" aria-hidden="true">
+						<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 8h16M8 5.5h.01M11 5.5h.01M8 12h8m-8 4h5"/></svg>
+					</span>
+					<div><p class="scenario-label">Situação 03</p><h2>Programa pirata</h2></div>
+				</div>
+				<p class="situation">Um site oferece gratuitamente uma versão “crackeada” de um programa pago e pede para desativar o antivírus durante a instalação.</p>
+				<form class="scenario-form" data-id="piracy">
+					<fieldset>
+						<legend>Qual é o risco e como agir?</legend>
+						<div class="options">
+							<label class="option"><input type="radio" name="piracy" value="piracy" required>O instalador pode trazer malware e alterações indesejadas. Não desative a proteção; procure o site oficial ou uma alternativa legítima.</label>
+							<label class="option"><input type="radio" name="piracy" value="antivirus">É seguro se o antivírus não mostrar um alerta. Instale e reative a proteção depois.</label>
+							<label class="option"><input type="radio" name="piracy" value="friends">Pergunte a alguém que já instalou se funcionou e siga os mesmos passos.</label>
+						</div>
+					</fieldset>
+					<button class="check-button" type="submit">Conferir resposta</button>
+					<div class="feedback" role="status" aria-live="polite" hidden></div>
+				</form>
+			</article>
+
+			<article class="scenario-card" data-answer="password">
+				<div class="scenario-head">
+					<span class="scenario-icon" aria-hidden="true">
+						<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/><circle cx="12" cy="15" r=".5"/></svg>
+					</span>
+					<div><p class="scenario-label">Situação 04</p><h2>Senha à vista</h2></div>
+				</div>
+				<p class="situation">Uma senha está anotada em um papel colado ao monitor, visível para colegas e visitantes. A mesma senha também é usada em outros serviços.</p>
+				<form class="scenario-form" data-id="password">
+					<fieldset>
+						<legend>Qual é o risco e como agir?</legend>
+						<div class="options">
+							<label class="option"><input type="radio" name="password" value="password" required>A senha pode ser vista e reutilizada para invadir outras contas. Remova o papel, crie senhas únicas e use um gerenciador e autenticação em dois fatores.</label>
+							<label class="option"><input type="radio" name="password" value="hide">Esconda o papel quando sair da sala e mantenha a senha atual.</label>
+							<label class="option"><input type="radio" name="password" value="rename">Troque por uma senha curta com símbolos para ficar mais fácil de memorizar.</label>
+						</div>
+					</fieldset>
+					<button class="check-button" type="submit">Conferir resposta</button>
+					<div class="feedback" role="status" aria-live="polite" hidden></div>
+				</form>
+			</article>
+
+			<article class="scenario-card" data-answer="updates">
+				<div class="scenario-head">
+					<span class="scenario-icon" aria-hidden="true">
+						<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.5 9a7 7 0 0 1 11.8-2L20 12M4 12l2.7 5a7 7 0 0 0 11.8-2"/></svg>
+					</span>
+					<div><p class="scenario-label">Situação 05</p><h2>Computador sem atualizações</h2></div>
+				</div>
+				<p class="situation">O sistema exibe atualizações pendentes há semanas. Você continua adiando porque o computador ainda parece funcionar normalmente.</p>
+				<form class="scenario-form" data-id="updates">
+					<fieldset>
+						<legend>Qual é o risco e como agir?</legend>
+						<div class="options">
+							<label class="option"><input type="radio" name="updates" value="updates" required>Falhas conhecidas podem continuar sem correção. Atualize pelas configurações do sistema ou canal oficial, ative atualizações automáticas e reinicie quando necessário.</label>
+							<label class="option"><input type="radio" name="updates" value="popup">Instale qualquer atualizador que apareça em anúncios ou janelas na internet.</label>
+							<label class="option"><input type="radio" name="updates" value="ignore">Ignore as atualizações se o computador ainda estiver funcionando.</label>
+						</div>
+					</fieldset>
+					<button class="check-button" type="submit">Conferir resposta</button>
+					<div class="feedback" role="status" aria-live="polite" hidden></div>
+				</form>
+			</article>
+		</section>
+
+		<section class="response-guide" aria-labelledby="response-title">
+			<span class="response-icon" aria-hidden="true">
+				<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4.5 6v5c0 4.7 3 8.3 7.5 10 4.5-1.7 7.5-5.3 7.5-10V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>
+			</span>
+			<div>
+				<h2 id="response-title">Uma rotina simples para reduzir riscos</h2>
+				<p>Pare antes de agir, verifique a origem por um canal confiável, evite conectar ou instalar o que não conhece e procure o suporte de TI quando não tiver certeza.</p>
+			</div>
+		</section>
+
+		<details class="recovery">
+			<summary>E se eu já cliquei, conectei ou instalei?</summary>
+			<p>Interrompa a ação e não forneça mais dados. Se informou uma senha, altere-a acessando o serviço pelo endereço oficial e habilite autenticação em dois fatores. Se conectou um dispositivo desconhecido ou executou um instalador suspeito, avise o suporte técnico e siga as orientações antes de continuar usando o computador para atividades sensíveis. Se informou dados financeiros, contate o banco por um canal oficial.</p>
+		</details>
+	</main>
+
+	<footer>Trilha de conhecimento · Segurança no computador · Módulo 4</footer>
+
+	<script>
+		const forms = [...document.querySelectorAll(".scenario-form")];
+		const results = new Map();
+		const progress = document.querySelector("#progress");
+
+		function updateProgress() {
+			const correct = [...results.values()].filter(Boolean).length;
+			progress.textContent = `${results.size} de ${forms.length} situações respondidas · ${correct} acertos`;
+		}
+
+		forms.forEach((form) => {
+			const card = form.closest(".scenario-card");
+			const feedback = form.querySelector(".feedback");
+
+			form.addEventListener("change", () => {
+				results.delete(form.dataset.id);
+				feedback.hidden = true;
+				feedback.classList.remove("is-incorrect");
+				updateProgress();
+			});
+
+			form.addEventListener("submit", (event) => {
+				event.preventDefault();
+				const selected = form.querySelector('input[type="radio"]:checked');
+				if (!selected) return;
+
+				const correct = selected.value === card.dataset.answer;
+				results.set(form.dataset.id, correct);
+				feedback.classList.toggle("is-incorrect", !correct);
+				feedback.innerHTML = correct
+					? `<strong>Correto.</strong>${card.dataset.explanation}`
+					: `<strong>Revise essa situação.</strong>${card.dataset.hint}`;
+				feedback.hidden = false;
+				updateProgress();
+			});
+		});
+
+		document.querySelectorAll(".scenario-card").forEach((card) => {
+			const id = card.querySelector(".scenario-form").dataset.id;
+			const explanations = {
+				link: "Urgência e endereço diferente do oficial são sinais de phishing. Acesse o serviço digitando o endereço conhecido ou usando o aplicativo oficial.",
+				usb: "Um pendrive desconhecido pode conter malware. Não conecte o dispositivo; entregue-o à equipe responsável ou ao suporte de TI.",
+				piracy: "Instaladores piratas ou modificados podem incluir malware. Mantenha a proteção ativa e baixe programas somente de fontes oficiais ou escolha uma alternativa legítima.",
+				password: "Uma senha exposta pode ser copiada e reutilizada para acessar outras contas. Use senhas longas e exclusivas, um gerenciador e autenticação em dois fatores.",
+				updates: "Atualizações corrigem falhas de segurança. Faça a atualização pelas configurações do sistema ou por um canal oficial, nunca por anúncios inesperados.",
+			};
+			const hints = {
+				link: "Um aviso de bloqueio e um endereço diferente do oficial podem ser usados para roubar credenciais. Não confie apenas no cadeado do navegador.",
+				usb: "Não é possível saber se um dispositivo encontrado é seguro apenas pela aparência ou pelo local onde foi deixado.",
+				piracy: "Desativar o antivírus e executar um instalador modificado remove barreiras importantes e pode expor seus dados.",
+				password: "Esconder o papel não resolve a reutilização da senha nem impede que alguém a veja. Prefira credenciais exclusivas e protegidas.",
+				updates: "Um sistema funcionando normalmente ainda pode ter falhas conhecidas. Atualize por uma fonte oficial, não por janelas ou anúncios desconhecidos.",
+			};
+			card.dataset.explanation = explanations[id];
+			card.dataset.hint = hints[id];
+		});
+	</script>
+</body>
+</html>

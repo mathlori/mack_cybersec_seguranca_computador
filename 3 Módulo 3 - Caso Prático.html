@@ -270,6 +270,13 @@
 			font-size: 13px;
 		}
 
+		.fake-link {
+			color: var(--red-dark);
+			text-decoration: underline;
+			text-decoration-style: dotted;
+			font-weight: 700;
+		}
+
 		.threat-count {
 			display: flex;
 			align-items: center;
@@ -601,7 +608,9 @@
 								<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5m0 3h.01"/></svg>
 								7 ameaças encontradas · proteção expira em 02:00
 							</div>
+							<p class="alert-copy">Verifique agora: <span class="fake-link">seguranca-verificar.example/limpeza</span> <small>(link ilustrativo)</small></p>
 							<p class="alert-copy">Instale o <strong>SuperProteção Pro</strong> ou pague <strong>R$ 89,90</strong> para remover os vírus.</p>
+							<p class="alert-copy">Informe seu CPF e os dados do cartão para concluir a remoção.</p>
 							<div class="fake-actions" aria-hidden="true">
 								<span class="fake-button">BAIXAR AGORA</span>
 								<span class="fake-button secondary">PAGAR E REMOVER</span>
@@ -634,12 +643,14 @@
 			</div>
 			<form class="exercise" id="signals-form">
 				<h3>Quais partes do alerta você não deve atender?</h3>
-				<p>Marque as frases e solicitações suspeitas. Nenhuma delas deve ser respondida clicando, baixando ou pagando.</p>
+				<p>Marque os sinais suspeitos. Não clique no link, não instale o programa, não pague e não informe dados.</p>
 				<div class="option-list">
 					<label class="option"><input type="checkbox" name="signal" value="claim">“Seu computador está infectado”: a afirmação não comprova que exista uma ameaça.</label>
 					<label class="option"><input type="checkbox" name="signal" value="urgency">“Aja agora” e “expira em 02:00”: a urgência tenta impedir que você verifique.</label>
+					<label class="option"><input type="checkbox" name="signal" value="link">O endereço “seguranca-verificar.example/limpeza” aparece inesperadamente. Não abra links fornecidos pelo alerta.</label>
 					<label class="option"><input type="checkbox" name="signal" value="download">“Instale o SuperProteção Pro”: não baixe o programa sugerido pelo alerta.</label>
 					<label class="option"><input type="checkbox" name="signal" value="payment">“Pague R$ 89,90”: não pague nem informe dados financeiros.</label>
+					<label class="option"><input type="checkbox" name="signal" value="data">O pedido de CPF e dados do cartão tenta coletar informações pessoais e financeiras.</label>
 					<label class="option"><input type="checkbox" name="signal" value="safe">Fechar a aba e abrir manualmente a ferramenta de segurança já instalada.</label>
 				</div>
 				<button class="check-button" type="submit">Conferir sinais</button>
@@ -662,6 +673,7 @@
 				<div class="option-list">
 					<label class="option action-option"><input type="radio" name="action" value="download">Baixar o programa indicado para confirmar se há vírus.</label>
 					<label class="option action-option"><input type="radio" name="action" value="pay">Pagar o valor solicitado para evitar danos.</label>
+					<label class="option action-option"><input type="radio" name="action" value="data">Informar CPF e dados do cartão para confirmar a identidade.</label>
 					<label class="option action-option"><input type="radio" name="action" value="safe">Não clicar; fechar a aba e verificar o computador por uma ferramenta confiável já instalada.</label>
 				</div>
 				<button class="check-button" type="submit">Conferir atitude</button>
@@ -677,7 +689,7 @@
 			</div>
 			<p class="guide-progress" id="guide-progress" aria-live="polite">Orientação 1 de 4</p>
 			<ol class="guide-list" id="guide-list">
-				<li><span><strong>Não clique, baixe nem pague.</strong> Não informe dados pessoais ou bancários.</span></li>
+				<li><span><strong>Não clique no link, baixe nem pague.</strong> Não informe CPF, dados pessoais ou bancários.</span></li>
 				<li hidden><span><strong>Feche a aba do navegador.</strong> Se não conseguir, feche o navegador pelo sistema; não use os botões do alerta.</span></li>
 				<li hidden><span><strong>Faça uma verificação</strong> abrindo manualmente a ferramenta de segurança já instalada no computador.</span></li>
 				<li hidden><span><strong>Peça ajuda por canais oficiais</strong> de suporte técnico se a mensagem continuar ou se tiver dúvidas.</span></li>
@@ -721,7 +733,7 @@
 		const signalsForm = document.querySelector("#signals-form");
 		const signalsFeedback = document.querySelector("#signals-feedback");
 		const signalsContinue = document.querySelector("#signals-continue");
-		const expectedSignals = new Set(["claim", "urgency", "download", "payment"]);
+		const expectedSignals = new Set(["claim", "urgency", "link", "download", "payment", "data"]);
 
 		signalsForm.addEventListener("change", () => {
 			signalsContinue.hidden = true;
@@ -739,8 +751,8 @@
 
 			signalsFeedback.className = `feedback is-visible${correct ? "" : " is-incorrect"}`;
 			signalsFeedback.innerHTML = correct
-				? "<strong>Isso mesmo: essas partes não devem ser atendidas.</strong>A mensagem não prova que o computador está infectado; a contagem regressiva pressiona você; e não se deve baixar o programa nem pagar. Feche a aba e, se quiser verificar, abra manualmente a ferramenta de segurança já instalada."
-				: "<strong>Revise os trechos do alerta e tente novamente.</strong>Marque a afirmação de infecção, a urgência, o pedido de download e a cobrança. Fechar a aba e abrir manualmente a ferramenta de segurança é a atitude segura, não um sinal de fraude.";
+				? "<strong>Isso mesmo: o alerta tenta induzir você a agir.</strong>A afirmação não comprova uma infecção. O link, a urgência, o programa desconhecido, a cobrança e o pedido de CPF e cartão são sinais de fraude. Não clique, instale, pague nem forneça dados."
+				: "<strong>Revise os trechos do alerta e tente novamente.</strong>Marque a afirmação de infecção, a urgência, o link, o programa desconhecido, a cobrança e o pedido de dados pessoais e financeiros. Fechar a aba e verificar pela ferramenta já instalada é a atitude segura.";
 			signalsContinue.hidden = !correct;
 		});
 		signalsContinue.addEventListener("click", () => showStep("step-action"));
