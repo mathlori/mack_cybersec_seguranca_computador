@@ -1,37 +1,27 @@
-# 🔐 7 cuidados essenciais para manter seu computador seguro
+# 🔐 Módulo 2 - 7 cuidados essenciais para manter seu computador seguro
 
 > **Projeto de Extensão — Segurança Digital**
 >
 > **Tema:** Segurança no Computador  
-> **Formato:** Cartilha educativa  
-> **Público-alvo:** Estudantes, trabalhadores e membros da comunidade  
-> **Objetivo:** Apresentar práticas simples e acessíveis para proteger computadores, arquivos e informações pessoais contra ameaças digitais.
+> **Módulo 2:** Cuidados Essenciais para manter o computador seguro
 
 ---
 
 ## 📢 Introdução
 
-Você já parou para pensar em quantas informações importantes estão armazenadas no seu computador?
+Agora que você já conhece alguns dos principais riscos ao utilizar computador, precisamos saber como prevenir cada um deles.
 
-Fotos, documentos, senhas, dados bancários e informações de trabalho podem ser alvos de criminosos digitais. Um simples clique em um link suspeito ou a instalação de um programa desconhecido pode comprometer a segurança do dispositivo.
+Afinal, um simples clique para acessar uma página ou baixar um arquivo pode causar sérios danos a suas finanças, reputação ou aos seus dados.
 
-Assim como trancamos a porta de casa para proteger nossos pertences, também precisamos adotar cuidados para proteger nossos computadores.
+Por isso, trouxemos aqui **7 Dicas Essenciais para Manter seu Computador Seguro**! São 7 dicas muito simples, porém que podem salvar seus dados.
 
-A boa notícia é que **pequenas mudanças de hábito podem reduzir significativamente os riscos digitais**.
-
-Neste material, você vai conhecer sete cuidados essenciais para utilizar seu computador com mais segurança.
-
-<!--
-📷 ESPAÇO PARA IMAGEM 1
-Sugestão: ilustração de um computador protegido por um escudo digital.
-Texto alternativo: Computador protegido contra ameaças digitais.
--->
+<img width="1500" height="1108" alt="Imagem de Computador Protegido" src="https://github.com/user-attachments/assets/c64ef9a0-4820-42b6-ae1c-1fb11d56295a" />
 
 ---
 
 # 🦠 1. Utilize um antivírus confiável
 
-Os malwares são programas maliciosos desenvolvidos para roubar informações, espionar usuários, danificar arquivos ou comprometer o funcionamento de um computador.
+Como já mencionamos, os malwares são programas maliciosos desenvolvidos para roubar informações, espionar usuários, danificar arquivos ou comprometer o funcionamento de um computador.
 
 Um antivírus ajuda a identificar, bloquear e remover diversas dessas ameaças. Entretanto, nenhuma ferramenta oferece proteção absoluta: os cuidados do usuário continuam sendo fundamentais.
 
@@ -53,6 +43,7 @@ Existem diferentes opções de ferramentas de segurança. Algumas são gratuitas
 | [Avast](https://www.avast.com/) | Oferece soluções de segurança com opções gratuitas e pagas, conforme o produto. |
 | [AVG AntiVirus](https://www.avg.com/) | Disponibiliza soluções de proteção, incluindo opções gratuitas e pagas. |
 | [Malwarebytes](https://www.malwarebytes.com/) | Oferece ferramentas para identificar e combater diferentes tipos de ameaças digitais. |
+| [Norton 360](https://us.norton.com/products/norton-360) | Solução de segurança com recursos que podem incluir proteção contra malware, firewall, VPN e monitoramento de ameaças online, conforme o plano contratado. |
 
 **💡 Qual devo escolher?**
 
@@ -62,36 +53,15 @@ Caso escolha outro antivírus com proteção em tempo real, evite manter dois an
 
 **⚠️ Atenção:** baixe ferramentas de segurança somente pelos sites oficiais. Existem falsos antivírus que, na realidade, instalam programas maliciosos no computador.
 
-<!--
-📷 ESPAÇO PARA IMAGEM 2
-Sugestão: captura de tela da área "Proteção contra vírus e ameaças" da Segurança do Windows.
-Orientação: utilizar uma captura própria, sem informações pessoais.
--->
-
-### 🎯 Widget sugerido — Você está protegido?
-
-**Tipo:** Questionário interativo.
-
-**Pergunta:** Qual destas atitudes ajuda a proteger seu computador contra malwares?
-
-- ( ) Desativar o antivírus para melhorar o desempenho.
-- ( ) Instalar programas encontrados em qualquer site.
-- ( ) Manter a proteção ativada e realizar verificações periódicas.
-- ( ) Ignorar os alertas de segurança.
-
-**Resposta correta:** Manter a proteção ativada e realizar verificações periódicas.
-
-**Explicação:** Um antivírus atualizado ajuda a detectar ameaças, mas precisa estar ativo e ser utilizado em conjunto com outras boas práticas de segurança.
+<img width="1265" height="994" alt="image" src="https://github.com/user-attachments/assets/77a5d47b-3c8e-43f0-8aa2-f71a0d818f47" />
 
 ---
 
 # 🎣 2. Desconfie de links e mensagens suspeitas
 
-O phishing é um golpe no qual criminosos se passam por instituições ou pessoas confiáveis para roubar informações pessoais, senhas e dados financeiros.
+É comum que em casos de phishing, os criminosos se apresentem como entidades importantes como bancos ou como o governo, e que tragam "mensagens urgentes" para amedrontar aos usuários.
 
-Esses golpes podem chegar por e-mail, mensagens instantâneas, redes sociais ou até mesmo por meio de páginas falsas que imitam sites conhecidos.
-
-Os criminosos frequentemente utilizam mensagens alarmantes ou ofertas muito atrativas para convencer a vítima a agir sem pensar.
+Por isso, é de extrema importância que sempre se desconfie dessas mensagens suspeitas: verificar a origem e o destinatário, e, em caso de dúvidas, contatar a empresa responsável.
 
 ### 📌 Exemplos de situações suspeitas
 
@@ -114,42 +84,7 @@ Os criminosos frequentemente utilizam mensagens alarmantes ou ofertas muito atra
 
 A melhor opção é acessar o site oficial digitando o endereço no navegador ou utilizando um aplicativo oficial já instalado.
 
-<!--
-📷 ESPAÇO PARA IMAGEM 3
-Sugestão: comparação entre uma mensagem legítima e uma mensagem falsa.
-Destaque visualmente:
-- Remetente suspeito.
-- Erros ou inconsistências no texto.
-- Senso de urgência.
-- Link com domínio diferente do oficial.
--->
-
-### 🎯 Widget sugerido — Identifique o phishing
-
-**Tipo:** Simulação interativa.
-
-**Situação apresentada:**
-
-Você recebe o seguinte e-mail:
-
-> **Assunto: Sua conta será bloqueada!**
->
-> Detectamos um problema na sua conta. Para evitar o bloqueio imediato, clique no link abaixo e confirme seus dados.
->
-> [Regularizar minha conta]
-
-**Pergunta:** Qual é a atitude mais segura?
-
-- ( ) Clicar imediatamente para evitar o bloqueio.
-- ( ) Responder ao e-mail informando seus dados.
-- ( ) Acessar o site oficial da instituição por um canal confiável para verificar o aviso.
-- ( ) Encaminhar a mensagem para todos os seus contatos.
-
-**Resposta correta:** Acessar o site oficial da instituição por um canal confiável para verificar o aviso.
-
-**Explicação:** Mensagens que combinam urgência, ameaças e solicitações de dados podem ser tentativas de phishing. É importante verificar a legitimidade da comunicação antes de agir.
-
----
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/4b066dce-4f08-444f-8ed4-8f7e7469f423" />
 
 # 🔑 3. Utilize senhas fortes e autenticação de dois fatores
 
@@ -201,26 +136,7 @@ Essa proteção dificulta o acesso indevido mesmo quando uma senha é descoberta
 
 Sempre que possível, prefira métodos de autenticação resistentes a phishing, como chaves de segurança ou passkeys.
 
-<!--
-📷 ESPAÇO PARA IMAGEM 4
-Sugestão: ilustração de uma senha protegida por um cadeado e uma segunda etapa de autenticação.
--->
-
-### 🎯 Widget sugerido — Sua senha é segura?
-
-**Tipo:** Simulador educativo de senhas.
-
-O participante poderá visualizar exemplos fictícios de senhas e entender quais características contribuem para sua segurança.
-
-**Exemplos:**
-
-- `12345678` — senha previsível.
-- `Matheus2005` — exemplo baseado em informações pessoais previsíveis.
-- `Caderno!Nuvem7PonteAzul` — exemplo de frase-senha longa.
-
-**Orientação:** a última senha é apenas um exemplo didático. Não a utilize em uma conta real.
-
-**Regra de segurança do widget:** não solicite nem armazene senhas verdadeiras dos participantes. O objetivo é ensinar boas práticas, não coletar credenciais.
+<img width="739" height="415" alt="image" src="https://github.com/user-attachments/assets/51c6529c-6cc1-49a8-914e-a4c457ecde2a" />
 
 ---
 
@@ -257,25 +173,7 @@ Os nomes das opções podem variar conforme a versão do sistema operacional.
 
 **💡 Dica importante:** não confie em janelas inesperadas que afirmam que seu computador está desatualizado e exigem a instalação imediata de um programa desconhecido. Verifique as atualizações diretamente nas configurações do sistema ou no site oficial do fabricante.
 
-<!--
-📷 ESPAÇO PARA IMAGEM 5
-Sugestão: captura de tela da página Windows Update.
--->
-
-### 🎯 Widget sugerido — Mito ou verdade?
-
-**Tipo:** Quiz interativo.
-
-**Afirmação:** "Se meu computador está funcionando normalmente, não preciso instalar atualizações de segurança."
-
-- ( ) Mito.
-- ( ) Verdade.
-
-**Resposta correta:** Mito.
-
-**Explicação:** Mesmo quando o computador parece funcionar normalmente, podem existir vulnerabilidades que precisam ser corrigidas por atualizações.
-
----
+<img width="2332" height="1765" alt="image" src="https://github.com/user-attachments/assets/ecbced6c-f906-4202-be82-7bd97381211f" />
 
 # 📥 5. Instale programas somente de fontes confiáveis
 
@@ -305,31 +203,7 @@ Programas piratas, instaladores modificados e extensões desconhecidas também p
 
 Essas ferramentas ajudam a reduzir riscos, mas não substituem a verificação da procedência dos arquivos.
 
-<!--
-📷 ESPAÇO PARA IMAGEM 6
-Sugestão: comparação entre uma página oficial de download e um anúncio suspeito que imita um botão de instalação.
--->
-
-### 🎯 Widget sugerido — Você instalaria este programa?
-
-**Tipo:** Cenário de tomada de decisão.
-
-**Situação:**
-
-Você encontra um programa pago disponível gratuitamente em um site desconhecido. A página informa que é necessário desativar o antivírus para concluir a instalação.
-
-**Qual é a melhor decisão?**
-
-- ( ) Desativar o antivírus e continuar.
-- ( ) Instalar o programa porque ele é gratuito.
-- ( ) Não prosseguir e procurar uma fonte oficial e confiável.
-- ( ) Ignorar o alerta do sistema.
-
-**Resposta correta:** Não prosseguir e procurar uma fonte oficial e confiável.
-
-**Explicação:** Solicitações para desativar mecanismos de proteção, especialmente durante a instalação de programas desconhecidos, representam um sinal de alerta.
-
----
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/d026a56a-9f7c-48a9-acef-54825f788762" />
 
 # 💾 6. Faça cópias de segurança dos seus arquivos
 
@@ -365,27 +239,6 @@ Por exemplo, você pode armazenar uma cópia na nuvem e outra em um dispositivo 
 Para informações especialmente importantes, considere uma estratégia de backup que mantenha uma cópia desconectada do computador. Isso pode ajudar a reduzir o risco de que um ransomware comprometa simultaneamente os arquivos originais e suas cópias.
 
 **⚠️ Atenção:** sincronização não é exatamente a mesma coisa que backup. Se você excluir ou modificar um arquivo, essa alteração poderá ser refletida nos dispositivos sincronizados. Verifique os recursos de histórico de versões e recuperação oferecidos pelo serviço escolhido.
-
-<!--
-📷 ESPAÇO PARA IMAGEM 7
-Sugestão: ilustração mostrando um computador, um serviço de nuvem e um dispositivo externo contendo cópias dos arquivos.
--->
-
-### 🎯 Widget sugerido — Seus arquivos estão protegidos?
-
-**Tipo:** Checklist interativo.
-
-Marque as opções que correspondem à sua rotina:
-
-- [ ] Tenho cópias dos meus arquivos importantes.
-- [ ] Realizo backups regularmente.
-- [ ] Mantenho uma cópia em um local diferente do computador.
-- [ ] Sei como recuperar meus arquivos.
-- [ ] Verifico se os backups estão funcionando.
-
-**Resultado educativo:**
-
-Se você marcou poucas opções, vale a pena estabelecer uma rotina de backup. Comece pelos documentos, fotos e arquivos que seriam mais difíceis de recuperar.
 
 ---
 
@@ -431,56 +284,7 @@ Se precisar utilizar uma rede de um aeroporto, shopping, biblioteca ou cafeteria
 
 **💡 Importante:** o cadeado exibido pelo navegador indica que a conexão utiliza HTTPS, mas não comprova que o site pertence a uma organização legítima. Criminosos também podem criar sites fraudulentos com HTTPS.
 
-<!--
-📷 ESPAÇO PARA IMAGEM 8
-Sugestão: ilustração de um computador conectado a uma rede Wi-Fi, com cadeado e escudo de proteção.
--->
-
-### 🎯 Widget sugerido — Qual é a atitude mais segura?
-
-**Tipo:** Quiz interativo.
-
-**Pergunta:** Você precisa se afastar do computador em uma biblioteca pública. O que deve fazer?
-
-- ( ) Deixar o computador aberto, pois ficará ausente por pouco tempo.
-- ( ) Pedir a uma pessoa desconhecida para vigiar a tela.
-- ( ) Bloquear a tela antes de se afastar.
-- ( ) Desligar o antivírus para evitar notificações.
-
-**Resposta correta:** Bloquear a tela antes de se afastar.
-
-**Explicação:** O bloqueio da sessão ajuda a impedir que outras pessoas acessem seus arquivos e aplicativos enquanto você estiver ausente.
-
----
-
-# ☑️ Checklist final — Seu computador está mais seguro?
-
-Agora que você conhece os sete cuidados essenciais, utilize esta lista para revisar seus hábitos de segurança digital.
-
-Marque as ações que você já realiza:
-
-- [ ] 🛡️ Mantenho um antivírus confiável ativo e atualizado.
-- [ ] 🎣 Verifico a legitimidade de mensagens e links suspeitos.
-- [ ] 🔑 Utilizo senhas fortes e exclusivas.
-- [ ] 🔐 Ativo a autenticação de dois fatores nas contas importantes.
-- [ ] 🔄 Mantenho o sistema operacional e os programas atualizados.
-- [ ] 📥 Instalo aplicativos somente de fontes confiáveis.
-- [ ] 💾 Faço cópias de segurança dos meus arquivos importantes.
-- [ ] 🌐 Tenho cuidado ao utilizar redes Wi-Fi públicas.
-- [ ] 🔒 Bloqueio a tela quando me afasto do computador.
-- [ ] ⚙️ Reviso as permissões concedidas aos aplicativos.
-
-### 🎯 Como interpretar seu resultado?
-
-**0 a 3 itens marcados:** comece pelos cuidados básicos, como atualizar o sistema, ativar a proteção antivírus e criar senhas exclusivas.
-
-**4 a 7 itens marcados:** você já adota algumas boas práticas. Identifique os cuidados que ainda faltam e incorpore-os à sua rotina.
-
-**8 a 10 itens marcados:** você já possui bons hábitos de segurança. Continue revisando suas práticas e mantenha suas ferramentas atualizadas.
-
-> **Importante:** essa classificação é apenas educativa. A quantidade de itens marcados não representa uma avaliação técnica da segurança do seu computador.
-
----
+<img width="1200" height="628" alt="image" src="https://github.com/user-attachments/assets/2dd66424-2ef8-4bad-a927-f125e486cd05" />
 
 # 🚨 Bônus — O que fazer se você suspeitar de um ataque?
 
