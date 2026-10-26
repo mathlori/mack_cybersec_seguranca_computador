@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#a6192e">
+	<title>Módulo 3 | Alerta falso de vírus</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--red: #a6192e;
+			--red-dark: #741326;
+			--red-pale: #fae9ec;
+			--ink: #272324;
+			--muted: #6f6869;
+			--line: #e7dfe0;
+			--paper: #fffdfc;
+			--green: #176b48;
+			--green-pale: #e8f4ed;
+			--shadow: 0 20px 55px #44121c18;
+		}
+
+		* { box-sizing: border-box; }
+		[hidden] { display: none !important; }
+
+		body {
+			margin: 0;
+			color: var(--ink);
+			background:
+				radial-gradient(ellipse at 8% 17%, #f8e8e9 0, transparent 32rem),
+				repeating-linear-gradient(135deg, #fff 0, #fff 18px, #fffafa 18px, #fffafa 19px);
+			font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+			line-height: 1.55;
+		}
+
+		button, input { font: inherit; }
+		button { cursor: pointer; }
+
+		.topbar {
+			min-height: 66px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 18px;
+			padding: 12px clamp(18px, 5vw, 72px);
+			color: #fff;
+			background: var(--red);
+			border-bottom: 4px solid var(--red-dark);
+		}
+
+		.brand {
+			display: flex;
+			align-items: center;
+			gap: 11px;
+			font-size: 13px;
+			font-weight: 800;
+			letter-spacing: .08em;
+			text-transform: uppercase;
+		}
+
+		.brand-mark {
+			width: 30px;
+			height: 30px;
+			display: grid;
+			place-items: center;
+			border: 1px solid #ffffff9c;
+			border-radius: 50%;
+		}
+
+		.topbar-note {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 12px;
+			font-weight: 700;
+		}
+
+		.topbar-note svg { flex: 0 0 auto; }
+
+		main {
+			width: min(1100px, calc(100% - 36px));
+			margin: 0 auto;
+			padding: 46px 0 64px;
+		}
+
+		.intro {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) 210px;
+			align-items: end;
+			gap: 28px;
+			margin-bottom: 30px;
+		}
+
+		.eyebrow {
+			margin: 0 0 10px;
+			color: var(--red);
+			font-size: 12px;
+			font-weight: 800;
+			letter-spacing: .13em;
+			text-transform: uppercase;
+		}
+
+		h1, h2, h3, p { margin-top: 0; }
+
+		h1 {
+			max-width: 700px;
+			margin-bottom: 12px;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: clamp(34px, 5vw, 56px);
+			font-weight: 500;
+			line-height: 1.04;
+		}
+
+		.intro-copy {
+			max-width: 680px;
+			margin: 0;
+			color: var(--muted);
+			font-size: 16px;
+		}
+
+		.module-stamp {
+			justify-self: end;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: 12px 15px;
+			border-left: 2px solid var(--red);
+			color: var(--muted);
+			font-size: 12px;
+			line-height: 1.4;
+		}
+
+		.module-stamp strong {
+			display: block;
+			color: var(--ink);
+			font-size: 14px;
+		}
+
+		.simulation {
+			overflow: hidden;
+			border: 1px solid #e7dfe0;
+			border-radius: 8px;
+			background: var(--paper);
+			box-shadow: var(--shadow);
+		}
+
+		.simulation-head {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 14px;
+			padding: 13px 18px;
+			border-bottom: 1px solid var(--line);
+			background: #fff;
+		}
+
+		.simulation-label {
+			display: flex;
+			align-items: center;
+			gap: 9px;
+			color: var(--red-dark);
+			font-size: 12px;
+			font-weight: 800;
+			letter-spacing: .06em;
+			text-transform: uppercase;
+		}
+
+		.simulation-label svg { flex: 0 0 auto; }
+
+		.sim-only {
+			padding: 4px 8px;
+			border: 1px solid #e7c4ca;
+			border-radius: 999px;
+			color: var(--red-dark);
+			background: var(--red-pale);
+			font-size: 10px;
+			font-weight: 800;
+			letter-spacing: .05em;
+			text-transform: uppercase;
+			white-space: nowrap;
+		}
+
+		.desktop {
+			min-height: 325px;
+			display: grid;
+			grid-template-columns: 1fr minmax(285px, 390px) 1fr;
+			align-items: center;
+			gap: 20px;
+			padding: 30px clamp(18px, 5vw, 58px);
+			background:
+				linear-gradient(#ffffffd9, #ffffffd9),
+				repeating-linear-gradient(0deg, #eadfe0 0, #eadfe0 1px, transparent 1px, transparent 28px),
+				repeating-linear-gradient(90deg, #eadfe0 0, #eadfe0 1px, transparent 1px, transparent 28px);
+		}
+
+		.desktop-note {
+			max-width: 210px;
+			color: var(--muted);
+			font-size: 13px;
+		}
+
+		.desktop-note strong {
+			display: block;
+			margin-bottom: 5px;
+			color: var(--ink);
+			font-size: 14px;
+		}
+
+		.desktop-note svg {
+			display: block;
+			margin-bottom: 12px;
+			color: var(--red);
+		}
+
+		.fake-alert {
+			overflow: hidden;
+			border: 1px solid #d3c6c8;
+			border-radius: 6px;
+			background: white;
+			box-shadow: 0 12px 30px #37212626;
+		}
+
+		.fake-alert-titlebar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 9px 12px;
+			color: #fff;
+			background: #353234;
+			font-size: 11px;
+		}
+
+		.window-dots { display: flex; gap: 5px; }
+		.window-dots span { width: 7px; height: 7px; border-radius: 50%; background: #c6babc; }
+
+		.fake-alert-body { padding: 20px 21px 18px; }
+
+		.alert-heading {
+			display: flex;
+			align-items: center;
+			gap: 11px;
+			margin-bottom: 12px;
+		}
+
+		.alert-icon {
+			width: 38px;
+			height: 38px;
+			display: grid;
+			place-items: center;
+			flex: 0 0 auto;
+			border-radius: 50%;
+			color: white;
+			background: var(--red);
+		}
+
+		.alert-heading h2 {
+			margin: 0;
+			color: var(--red-dark);
+			font-size: 16px;
+			line-height: 1.2;
+		}
+
+		.alert-heading span {
+			color: var(--muted);
+			font-size: 11px;
+		}
+
+		.alert-copy {
+			margin-bottom: 12px;
+			font-size: 13px;
+		}
+
+		.threat-count {
+			display: flex;
+			align-items: center;
+			gap: 9px;
+			margin: 12px 0;
+			padding: 9px 10px;
+			border: 1px solid #f0d2d7;
+			border-radius: 4px;
+			color: var(--red-dark);
+			background: #fff7f8;
+			font-size: 12px;
+			font-weight: 700;
+		}
+
+		.fake-actions {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 8px;
+			margin-top: 14px;
+		}
+
+		.fake-button {
+			padding: 9px 7px;
+			border: 0;
+			border-radius: 3px;
+			color: #fff;
+			background: var(--red);
+			font-size: 11px;
+			font-weight: 800;
+			text-align: center;
+		}
+
+		.fake-button.secondary { color: var(--red-dark); background: #f5e5e8; }
+
+		.not-clickable {
+			margin: 10px 0 0;
+			color: var(--muted);
+			font-size: 10px;
+			text-align: center;
+		}
+
+		.case-intro {
+			display: grid;
+			grid-template-columns: 44px 1fr;
+			gap: 14px;
+			align-items: start;
+			margin: 30px 0 25px;
+		}
+
+		.case-number {
+			width: 42px;
+			height: 42px;
+			display: grid;
+			place-items: center;
+			border-radius: 50%;
+			color: #fff;
+			background: var(--red);
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 20px;
+		}
+
+		.case-intro h2 {
+			margin-bottom: 4px;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 25px;
+			font-weight: 500;
+		}
+
+		.case-intro p { margin: 0; color: var(--muted); }
+
+		.exercise-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 18px;
+		}
+
+		.exercise {
+			min-width: 0;
+			padding: 22px;
+			border: 1px solid var(--line);
+			border-top: 3px solid var(--red);
+			border-radius: 5px;
+			background: #fff;
+		}
+
+		.exercise h3 {
+			margin-bottom: 6px;
+			font-size: 17px;
+		}
+
+		.exercise > p {
+			min-height: 42px;
+			margin-bottom: 15px;
+			color: var(--muted);
+			font-size: 13px;
+		}
+
+		.option-list { display: grid; gap: 8px; }
+
+		.option {
+			display: flex;
+			align-items: flex-start;
+			gap: 10px;
+			padding: 10px 11px;
+			border: 1px solid var(--line);
+			border-radius: 4px;
+			background: #fff;
+			cursor: pointer;
+			font-size: 13px;
+			transition: border-color .16s ease, background-color .16s ease;
+		}
+
+		.option:hover { border-color: #c8838e; background: #fffafb; }
+
+		.option input {
+			width: 16px;
+			height: 16px;
+			flex: 0 0 auto;
+			margin: 2px 0 0;
+			accent-color: var(--red);
+		}
+
+		.action-option { min-height: 54px; }
+
+		.check-button {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			margin-top: 15px;
+			padding: 10px 14px;
+			border: 0;
+			border-radius: 4px;
+			color: #fff;
+			background: var(--red);
+			font-size: 13px;
+			font-weight: 800;
+			transition: background-color .16s ease, transform .16s ease;
+		}
+
+		.check-button:hover { background: var(--red-dark); transform: translateY(-1px); }
+		.check-button:focus-visible, .option:focus-within { outline: 3px solid #d99ba5; outline-offset: 2px; }
+
+		.feedback {
+			display: none;
+			margin: 13px 0 0;
+			padding: 12px 13px;
+			border-left: 3px solid var(--green);
+			color: #174c37;
+			background: var(--green-pale);
+			font-size: 13px;
+		}
+
+		.feedback.is-visible { display: block; }
+		.feedback.is-incorrect { border-color: var(--red); color: var(--red-dark); background: var(--red-pale); }
+		.feedback strong { display: block; margin-bottom: 3px; }
+
+		.guide {
+			margin-top: 34px;
+			padding: 24px 26px;
+			border-radius: 6px;
+			color: #fff;
+			background: var(--red-dark);
+		}
+
+		.guide-heading {
+			display: flex;
+			align-items: center;
+			gap: 11px;
+			margin-bottom: 17px;
+		}
+
+		.guide-heading h2 {
+			margin: 0;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 23px;
+			font-weight: 500;
+		}
+
+		.guide-list {
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 15px;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			counter-reset: guide;
+		}
+
+		.guide-list li {
+			position: relative;
+			padding: 12px 10px 0 0;
+			border-top: 1px solid #ffffff5c;
+			color: #fff4f5;
+			font-size: 12px;
+			counter-increment: guide;
+		}
+
+		.guide-list li::before {
+			content: "0" counter(guide);
+			display: block;
+			margin-bottom: 7px;
+			color: #f3b7c0;
+			font-size: 11px;
+			font-weight: 800;
+			letter-spacing: .1em;
+		}
+
+		.guide-list strong { color: #fff; }
+
+		.if-clicked {
+			display: grid;
+			grid-template-columns: 28px 1fr;
+			gap: 12px;
+			margin-top: 16px;
+			padding: 16px 18px;
+			border: 1px solid #e7dfe0;
+			border-radius: 5px;
+			background: #fff;
+		}
+
+		.if-clicked svg { color: var(--red); }
+		.if-clicked h3 { margin-bottom: 4px; font-size: 14px; }
+		.if-clicked p { margin: 0; color: var(--muted); font-size: 13px; }
+
+		.closing {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			margin: 23px 0 0;
+			color: var(--red-dark);
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 19px;
+		}
+
+		.closing svg { flex: 0 0 auto; }
+
+		footer {
+			padding: 17px 20px;
+			border-top: 1px solid var(--line);
+			color: var(--muted);
+			font-size: 11px;
+			text-align: center;
+		}
+
+		@media (max-width: 760px) {
+			main { padding-top: 32px; }
+			.intro { grid-template-columns: 1fr; gap: 14px; }
+			.module-stamp { justify-self: start; }
+			.desktop { grid-template-columns: 1fr; justify-items: center; padding: 22px 16px; }
+			.desktop-note { display: none; }
+			.fake-alert { width: min(100%, 390px); }
+			.exercise-grid { grid-template-columns: 1fr; }
+			.exercise > p { min-height: 0; }
+			.guide-list { grid-template-columns: 1fr 1fr; }
+		}
+
+		@media (max-width: 440px) {
+			.topbar { align-items: flex-start; }
+			.brand { font-size: 11px; }
+			.topbar-note { max-width: 126px; font-size: 10px; }
+			.simulation-head { align-items: flex-start; }
+			.simulation-label { font-size: 10px; }
+			.guide { padding: 20px 18px; }
+			.guide-list { grid-template-columns: 1fr; gap: 9px; }
+			.guide-list li { display: grid; grid-template-columns: 35px 1fr; gap: 8px; padding-top: 10px; }
+			.guide-list li::before { margin: 0; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+		}
+	</style>
+</head>
+<body>
+	<header class="topbar">
+		<div class="brand">
+			<span class="brand-mark" aria-hidden="true">
+				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 5 6v5c0 4.5 2.9 8.2 7 10 4.1-1.8 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+			</span>
+			Trilha de segurança digital
+		</div>
+		<div class="topbar-note">
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg>
+			Material educativo
+		</div>
+	</header>
+
+	<main>
+		<section class="intro" aria-labelledby="page-title">
+			<div>
+				<p class="eyebrow">Módulo 3 · Caso prático</p>
+				<h1 id="page-title">Um alerta apareceu.<br>O que você faz?</h1>
+				<p class="intro-copy">Uma janela inesperada diz que seu computador está infectado e exige um download ou pagamento. Analise a situação antes de tomar qualquer atitude.</p>
+			</div>
+			<div class="module-stamp" aria-label="Caso prático interativo">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3 4.5 6v5c0 4.7 3 8.3 7.5 10 4.5-1.7 7.5-5.3 7.5-10V6L12 3Z"/><path d="M12 8v5m0 3h.01"/></svg>
+				<span><strong>Decida com calma</strong>Leva cerca de 2 minutos</span>
+			</div>
+		</section>
+
+		<section class="simulation" aria-labelledby="simulation-title">
+				<div class="simulation-head">
+					<div class="simulation-label" id="simulation-title">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01"/></svg>
+						Situação simulada
+					</div>
+					<span class="sim-only">Demonstração · não é um alerta real</span>
+				</div>
+				<div class="desktop">
+					<div class="desktop-note">
+						<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3 4 6v5c0 5 3.3 8.5 8 10 4.7-1.5 8-5 8-10V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+						<strong>Você estava navegando</strong>
+						Sem abrir o antivírus, uma página exibe um aviso urgente sobre supostas ameaças.
+					</div>
+					<div class="fake-alert" aria-label="Exemplo visual de alerta fraudulento; os controles abaixo são apenas ilustrativos e não podem ser clicados">
+						<div class="fake-alert-titlebar">
+							<span>Central de proteção do navegador</span>
+							<span class="window-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+						</div>
+						<div class="fake-alert-body">
+							<div class="alert-heading">
+								<span class="alert-icon" aria-hidden="true">
+									<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5m0 3h.01"/></svg>
+								</span>
+								<div><h2>VÍRUS DETECTADO!</h2><span>Alerta urgente de segurança</span></div>
+							</div>
+							<p class="alert-copy">Seu computador está infectado. Aja agora para evitar a perda dos seus arquivos.</p>
+							<div class="threat-count">
+								<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5m0 3h.01"/></svg>
+								7 ameaças encontradas · proteção expira em 02:00
+							</div>
+							<p class="alert-copy">Instale o <strong>SuperProteção Pro</strong> ou pague <strong>R$ 89,90</strong> para remover os vírus.</p>
+							<div class="fake-actions" aria-hidden="true">
+								<span class="fake-button">BAIXAR AGORA</span>
+								<span class="fake-button secondary">PAGAR E REMOVER</span>
+							</div>
+							<p class="not-clickable">Controles ilustrativos. Não clique: este alerta é uma simulação.</p>
+						</div>
+					</div>
+					<div class="desktop-note">
+						<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg>
+						<strong>Pare e observe</strong>
+						O susto e a pressa fazem parte da estratégia. Você não precisa responder à janela.
+					</div>
+				</div>
+		</section>
+
+		<section class="step" id="step-alert" aria-label="Início do caso">
+			<div class="step-navigation">
+				<p>Leia o alerta com atenção. Os botões exibidos nele são apenas ilustrativos.</p>
+				<button class="check-button" id="alert-continue" type="button">Analisar os sinais</button>
+			</div>
+		</section>
+
+		<section class="step" id="step-signals" aria-labelledby="exercise-title" hidden>
+			<div class="case-intro">
+				<span class="case-number" aria-hidden="true">1</span>
+				<div>
+					<h2 id="exercise-title">Investigue os sinais</h2>
+					<p>Marque os elementos suspeitos que aparecem no alerta.</p>
+				</div>
+			</div>
+			<form class="exercise" id="signals-form">
+				<h3>Quais partes do alerta você não deve atender?</h3>
+				<p>Marque as frases e solicitações suspeitas. Nenhuma delas deve ser respondida clicando, baixando ou pagando.</p>
+				<div class="option-list">
+					<label class="option"><input type="checkbox" name="signal" value="claim">“Seu computador está infectado”: a afirmação não comprova que exista uma ameaça.</label>
+					<label class="option"><input type="checkbox" name="signal" value="urgency">“Aja agora” e “expira em 02:00”: a urgência tenta impedir que você verifique.</label>
+					<label class="option"><input type="checkbox" name="signal" value="download">“Instale o SuperProteção Pro”: não baixe o programa sugerido pelo alerta.</label>
+					<label class="option"><input type="checkbox" name="signal" value="payment">“Pague R$ 89,90”: não pague nem informe dados financeiros.</label>
+					<label class="option"><input type="checkbox" name="signal" value="safe">Fechar a aba e abrir manualmente a ferramenta de segurança já instalada.</label>
+				</div>
+				<button class="check-button" type="submit">Conferir sinais</button>
+				<div class="feedback" id="signals-feedback" role="status" aria-live="polite"></div>
+				<button class="check-button" id="signals-continue" type="button" hidden>Próxima pergunta</button>
+			</form>
+		</section>
+
+		<section class="step" id="step-action" aria-labelledby="action-title" hidden>
+			<div class="case-intro">
+				<span class="case-number" aria-hidden="true">2</span>
+				<div>
+					<h2 id="action-title">Escolha como agir</h2>
+					<p>Você reconheceu os sinais. Agora, qual é a atitude mais segura?</p>
+				</div>
+			</div>
+			<form class="exercise" id="action-form">
+				<h3>O que você faria?</h3>
+				<p>Escolha uma resposta. Não interaja com os controles do alerta.</p>
+				<div class="option-list">
+					<label class="option action-option"><input type="radio" name="action" value="download">Baixar o programa indicado para confirmar se há vírus.</label>
+					<label class="option action-option"><input type="radio" name="action" value="pay">Pagar o valor solicitado para evitar danos.</label>
+					<label class="option action-option"><input type="radio" name="action" value="safe">Não clicar; fechar a aba e verificar o computador por uma ferramenta confiável já instalada.</label>
+				</div>
+				<button class="check-button" type="submit">Conferir atitude</button>
+				<div class="feedback" id="action-feedback" role="status" aria-live="polite"></div>
+				<button class="check-button" id="action-continue" type="button" hidden>Ver orientações</button>
+			</form>
+		</section>
+
+		<section class="step guide" id="step-guidance" aria-labelledby="guide-title" hidden>
+			<div class="guide-heading">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3 4.5 6v5c0 4.7 3 8.3 7.5 10 4.5-1.7 7.5-5.3 7.5-10V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>
+				<h2 id="guide-title">Como agir com segurança</h2>
+			</div>
+			<p class="guide-progress" id="guide-progress" aria-live="polite">Orientação 1 de 4</p>
+			<ol class="guide-list" id="guide-list">
+				<li><span><strong>Não clique, baixe nem pague.</strong> Não informe dados pessoais ou bancários.</span></li>
+				<li hidden><span><strong>Feche a aba do navegador.</strong> Se não conseguir, feche o navegador pelo sistema; não use os botões do alerta.</span></li>
+				<li hidden><span><strong>Faça uma verificação</strong> abrindo manualmente a ferramenta de segurança já instalada no computador.</span></li>
+				<li hidden><span><strong>Peça ajuda por canais oficiais</strong> de suporte técnico se a mensagem continuar ou se tiver dúvidas.</span></li>
+			</ol>
+			<button class="check-button" id="guide-next" type="button">Próxima orientação</button>
+		</section>
+
+		<section class="step" id="step-complete" aria-labelledby="if-clicked-title" hidden>
+			<aside class="if-clicked">
+				<svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg>
+				<div>
+					<h3 id="if-clicked-title">E se você já clicou ou pagou?</h3>
+					<p>Não abra o arquivo baixado nem faça novos pagamentos. Se informou uma senha, troque-a acessando o serviço pelo endereço oficial e encerre sessões desconhecidas. Se forneceu dados financeiros, contate seu banco pelo canal oficial. Avise o suporte técnico; se executou um arquivo, pare de usar o computador para operações sensíveis até receber orientação.</p>
+				</div>
+			</aside>
+			<p class="closing">
+				<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 3 4.5 6v5c0 4.7 3 8.3 7.5 10 4.5-1.7 7.5-5.3 7.5-10V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>
+				Na dúvida, pare. Verifique por um caminho confiável. Só então aja.
+			</p>
+		</section>
+	</main>
+
+	<footer>Trilha de conhecimento · Segurança no computador · Módulo 3</footer>
+
+	<script>
+		const steps = [...document.querySelectorAll(".step")];
+		const showStep = (stepId) => {
+			steps.forEach((step) => { step.hidden = step.id !== stepId; });
+			const currentStep = document.querySelector(`#${stepId}`);
+			currentStep.focus({ preventScroll: true });
+			currentStep.scrollIntoView({ behavior: "smooth", block: "start" });
+		};
+
+		document.querySelector("#step-alert").setAttribute("tabindex", "-1");
+		document.querySelector("#step-signals").setAttribute("tabindex", "-1");
+		document.querySelector("#step-action").setAttribute("tabindex", "-1");
+		document.querySelector("#step-guidance").setAttribute("tabindex", "-1");
+		document.querySelector("#step-complete").setAttribute("tabindex", "-1");
+		document.querySelector("#alert-continue").addEventListener("click", () => showStep("step-signals"));
+
+		const signalsForm = document.querySelector("#signals-form");
+		const signalsFeedback = document.querySelector("#signals-feedback");
+		const signalsContinue = document.querySelector("#signals-continue");
+		const expectedSignals = new Set(["claim", "urgency", "download", "payment"]);
+
+		signalsForm.addEventListener("change", () => {
+			signalsContinue.hidden = true;
+			signalsFeedback.className = "feedback";
+		});
+
+		signalsForm.addEventListener("submit", (event) => {
+			event.preventDefault();
+			const selected = new Set(
+				[...signalsForm.querySelectorAll('input[name="signal"]:checked')]
+					.map((input) => input.value)
+			);
+			const correct = selected.size === expectedSignals.size
+				&& [...expectedSignals].every((signal) => selected.has(signal));
+
+			signalsFeedback.className = `feedback is-visible${correct ? "" : " is-incorrect"}`;
+			signalsFeedback.innerHTML = correct
+				? "<strong>Isso mesmo: essas partes não devem ser atendidas.</strong>A mensagem não prova que o computador está infectado; a contagem regressiva pressiona você; e não se deve baixar o programa nem pagar. Feche a aba e, se quiser verificar, abra manualmente a ferramenta de segurança já instalada."
+				: "<strong>Revise os trechos do alerta e tente novamente.</strong>Marque a afirmação de infecção, a urgência, o pedido de download e a cobrança. Fechar a aba e abrir manualmente a ferramenta de segurança é a atitude segura, não um sinal de fraude.";
+			signalsContinue.hidden = !correct;
+		});
+		signalsContinue.addEventListener("click", () => showStep("step-action"));
+
+		const actionForm = document.querySelector("#action-form");
+		const actionFeedback = document.querySelector("#action-feedback");
+		const actionContinue = document.querySelector("#action-continue");
+
+		actionForm.addEventListener("change", () => {
+			actionContinue.hidden = true;
+			actionFeedback.className = "feedback";
+		});
+
+		actionForm.addEventListener("submit", (event) => {
+			event.preventDefault();
+			const answer = actionForm.querySelector('input[name="action"]:checked');
+			const correct = answer?.value === "safe";
+
+			actionFeedback.className = `feedback is-visible${correct ? "" : " is-incorrect"}`;
+			actionFeedback.innerHTML = correct
+				? "<strong>Correto. Você manteve o controle.</strong>Feche a aba sem tocar no alerta e inicie uma verificação pela ferramenta de segurança já instalada. Nunca use telefones, links ou downloads oferecidos pela própria janela."
+				: "<strong>Essa opção pode aumentar o risco.</strong>Não baixe, pague nem use contatos fornecidos pelo alerta. Feche a aba e abra manualmente uma ferramenta de segurança confiável para verificar o dispositivo.";
+			actionContinue.hidden = !correct;
+		});
+		actionContinue.addEventListener("click", () => showStep("step-guidance"));
+
+		const guideItems = [...document.querySelectorAll("#guide-list li")];
+		const guideProgress = document.querySelector("#guide-progress");
+		const guideNext = document.querySelector("#guide-next");
+		let currentGuidance = 0;
+
+		guideNext.addEventListener("click", () => {
+			currentGuidance += 1;
+			if (currentGuidance === guideItems.length) {
+				showStep("step-complete");
+				return;
+			}
+
+			guideItems.forEach((item, index) => { item.hidden = index !== currentGuidance; });
+			guideProgress.textContent = `Orientação ${currentGuidance + 1} de ${guideItems.length}`;
+			if (currentGuidance === guideItems.length - 1) guideNext.textContent = "Concluir caso";
+		});
+	</script>
+</body>
+</html>
