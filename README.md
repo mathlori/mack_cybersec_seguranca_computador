@@ -69,6 +69,8 @@ Apresentação de uma situação em que o usuário visualiza um alerta alarmante
 
 O participante deverá identificar os sinais de fraude e aprender a agir com segurança, evitando clicar em links suspeitos, instalar programas desconhecidos ou fornecer informações pessoais e financeiras.
 
+A ideia é desenvolver um pequeno teste em React para que possa ser utilizado de referência dentro da plataforma.
+
 ---
 
 ## 🎯 4. Desafio — "Você consegue identificar os riscos?"
@@ -93,14 +95,16 @@ O participante deverá identificar os riscos apresentados e indicar medidas prev
 
 ## 📝 5. Quiz — "Você sabe proteger seu computador?"
 
-- **Formato:** Questionário interativo com 5 questões.
-- **Status:** ⏳ Em desenvolvimento.
+- **Formato:** Questionário interativo em HTML com 15 questões.
+- **Status:** ✅ Concluído.
 
 **📝 Conteúdo:**
 
 Avaliação dos conhecimentos adquiridos ao longo da trilha, abordando temas como proteção contra programas maliciosos (*malware*), atualização de sistemas, criação de senhas seguras, downloads confiáveis e identificação de ameaças digitais.
 
-Cada questão contará com uma explicação para a resposta correta, reforçando os conceitos apresentados nos materiais anteriores.
+O quiz inclui questões de múltipla escolha, seleção de mais de uma alternativa, verdadeiro ou falso e associação de situações a tipos de ameaça. Após o envio, apresenta a pontuação final e a explicação das alternativas corretas e incorretas.
+
+**📄 Arquivo:** [5 Quiz - Segurança no Computador.html](./5%20Quiz%20-%20Seguran%C3%A7a%20no%20Computador.html)
 
 ---
 

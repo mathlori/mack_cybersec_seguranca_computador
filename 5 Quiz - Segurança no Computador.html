@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#a6192e">
+	<title>Quiz | Segurança no Computador</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--red: #a6192e;
+			--red-dark: #741326;
+			--red-pale: #fae9ec;
+			--ink: #272324;
+			--muted: #6f6869;
+			--line: #e7dfe0;
+			--green: #176b48;
+			--green-pale: #e8f4ed;
+		}
+
+		* { box-sizing: border-box; }
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: radial-gradient(ellipse at 8% 12%, #f8e8e9 0, transparent 34rem), #fffdfc;
+			font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+			line-height: 1.55;
+		}
+		button, input { font: inherit; }
+		button { cursor: pointer; }
+		[hidden] { display: none !important; }
+
+		.topbar {
+			min-height: 66px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 18px;
+			padding: 12px clamp(18px, 5vw, 72px);
+			border-bottom: 4px solid var(--red-dark);
+			color: #fff;
+			background: var(--red);
+		}
+		.brand, .topbar-note { display: flex; align-items: center; gap: 10px; }
+		.brand { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+		.brand-mark { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid #ffffff9c; border-radius: 50%; }
+		.topbar-note { font-size: 12px; font-weight: 700; }
+
+		main { width: min(940px, calc(100% - 36px)); margin: 0 auto; padding: 44px 0 60px; }
+		.intro { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 28px; }
+		.eyebrow { margin: 0 0 9px; color: var(--red); font-size: 12px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+		h1, h2, h3, p { margin-top: 0; }
+		h1 { max-width: 700px; margin-bottom: 11px; font: 500 clamp(34px, 5vw, 55px)/1.04 Georgia, "Times New Roman", serif; }
+		.intro-copy { max-width: 690px; margin: 0; color: var(--muted); font-size: 16px; }
+		.module-stamp { flex: 0 0 auto; padding: 10px 14px; border-left: 2px solid var(--red); color: var(--muted); font-size: 12px; }
+		.module-stamp strong { display: block; color: var(--ink); font-size: 14px; }
+
+		.challenge-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 28px 0 15px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 5px; background: #fff; }
+		.challenge-bar strong { font-size: 13px; }
+		.challenge-bar output { color: var(--red-dark); font-size: 13px; font-weight: 800; text-align: right; }
+		.question-list { display: grid; gap: 15px; }
+		.question-card { min-width: 0; padding: 20px; border: 1px solid var(--line); border-top: 3px solid var(--red); border-radius: 6px; background: #fff; box-shadow: 0 8px 24px #44121c0b; }
+		.question-card h2 { margin: 0 0 14px; font-size: 17px; line-height: 1.4; }
+		.question-number { display: block; margin-bottom: 4px; color: var(--red); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+		.question-hint { margin: -5px 0 12px; color: var(--muted); font-size: 12px; }
+		fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+		.options { display: grid; gap: 7px; }
+		.option { display: flex; align-items: flex-start; gap: 9px; padding: 10px 11px; border: 1px solid var(--line); border-radius: 4px; color: #393435; cursor: pointer; font-size: 13px; line-height: 1.45; }
+		.option:hover { border-color: #c8838e; background: #fffafb; }
+		.option input { width: 16px; height: 16px; flex: 0 0 auto; margin: 2px 0 0; accent-color: var(--red); }
+		.option:focus-within { outline: 3px solid #d99ba5; outline-offset: 2px; }
+		.match-list { display: grid; gap: 12px; }
+		.match-item { padding: 12px; border: 1px solid var(--line); border-radius: 4px; }
+		.match-item h3 { margin: 0 0 8px; font-size: 13px; }
+		.match-item .options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+		.match-item .option { align-items: center; }
+		.feedback { margin: 12px 0 0; padding: 11px 13px; border-left: 3px solid var(--green); color: #174c37; background: var(--green-pale); font-size: 13px; }
+		.feedback.is-incorrect { border-color: var(--red); color: var(--red-dark); background: var(--red-pale); }
+		.feedback strong { display: block; margin-bottom: 3px; }
+		.option-review { display: grid; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+		.option-review li { padding: 9px 10px; border-radius: 4px; color: #514a4b; background: #f7f5f4; font-size: 12px; }
+		.option-review li.is-correct { color: #174c37; background: var(--green-pale); }
+		.option-review li.is-selected-incorrect { color: var(--red-dark); background: var(--red-pale); }
+		.match-feedback { margin: 10px 0 0; padding: 10px; border-left: 3px solid var(--green); color: #174c37; background: var(--green-pale); font-size: 12px; }
+		.match-feedback.is-incorrect { border-color: var(--red); color: var(--red-dark); background: var(--red-pale); }
+		.form-message { margin: 0 0 12px; color: var(--red-dark); font-size: 13px; font-weight: 700; }
+		.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+		.action-button { padding: 11px 16px; border: 0; border-radius: 4px; color: #fff; background: var(--red); font-size: 13px; font-weight: 800; }
+		.action-button:hover { background: var(--red-dark); }
+		.action-button.secondary { border: 1px solid var(--line); color: var(--red-dark); background: #fff; }
+		.action-button.secondary:hover { border-color: #c8838e; background: #fffafb; }
+		.action-button:focus-visible { outline: 3px solid #d99ba5; outline-offset: 2px; }
+		.result { margin-top: 24px; padding: 22px; border-radius: 6px; color: #fff; background: var(--red-dark); }
+		.result h2 { margin: 0 0 5px; font: 500 25px/1.2 Georgia, "Times New Roman", serif; }
+		.result p { margin: 0; color: #fff1f3; }
+		footer { padding: 17px 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; text-align: center; }
+
+		@media (max-width: 760px) {
+			main { padding-top: 32px; }
+			.intro { display: grid; gap: 14px; }
+			.module-stamp { justify-self: start; }
+			.match-item .options { grid-template-columns: 1fr; }
+		}
+		@media (max-width: 440px) {
+			.topbar { align-items: flex-start; }
+			.brand { font-size: 11px; }
+			.topbar-note { font-size: 10px; }
+			.challenge-bar { align-items: flex-start; flex-direction: column; gap: 4px; }
+			.challenge-bar output { text-align: left; }
+			.question-card { padding: 16px; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+		}
+	</style>
+</head>
+<body>
+	<header class="topbar">
+		<div class="brand">
+			<span class="brand-mark" aria-hidden="true">
+				<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 5 6v5c0 4.5 2.9 8.2 7 10 4.1-1.8 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+			</span>
+			Trilha de segurança digital
+		</div>
+		<div class="topbar-note">Quiz de conhecimentos</div>
+	</header>
+
+	<main>
+		<section class="intro" aria-labelledby="page-title">
+			<div>
+				<p class="eyebrow">Módulo 5 · Revise e pratique</p>
+				<h1 id="page-title" tabindex="-1">Você sabe proteger seu computador?</h1>
+				<p class="intro-copy">Responda às 15 questões sobre ameaças digitais e medidas de segurança. Algumas perguntas permitem mais de uma resposta. No final, você verá sua pontuação e a explicação de cada alternativa.</p>
+			</div>
+			<div class="module-stamp"><strong>15 questões</strong>Responda no seu ritmo</div>
+		</section>
+
+		<div class="challenge-bar">
+			<strong>Seu progresso</strong>
+			<output id="progress" aria-live="polite">0 de 15 questões respondidas</output>
+		</div>
+
+		<form id="quiz-form" novalidate>
+			<div id="question-list" class="question-list"></div>
+			<p id="form-message" class="form-message" role="alert" hidden></p>
+			<div class="actions">
+				<button class="action-button" type="submit">Ver resultado</button>
+				<button class="action-button secondary" type="reset">Recomeçar</button>
+			</div>
+		</form>
+		<section id="result" class="result" aria-live="polite" hidden></section>
+	</main>
+	<footer>Segurança digital começa com informação, atenção e prevenção.</footer>
+
+	<script>
+		const questions = [
+			{
+				type: "choice",
+				prompt: "Por que é importante manter o computador seguro?",
+				options: [
+					{ text: "Porque estamos sempre conectados e usamos o computador para muitas atividades, o que nos deixa vulneráveis a ataques.", correct: true, reason: "Correto. O uso frequente do computador para comunicação, estudos, trabalho e serviços online aumenta a exposição a ameaças." },
+					{ text: "Porque um computador seguro nunca precisa de atualizações.", correct: false, reason: "A segurança exige atualizações; elas corrigem falhas que podem ser exploradas." },
+					{ text: "Porque ataques só acontecem em computadores de empresas.", correct: false, reason: "Pessoas físicas também podem ser alvo de golpes, roubo de dados e malware." },
+					{ text: "Porque instalar qualquer antivírus impede todos os riscos.", correct: false, reason: "Ferramentas de proteção ajudam, mas não eliminam todos os riscos nem substituem hábitos seguros." }
+				]
+			},
+			{
+				type: "choice",
+				prompt: "O que são malwares?",
+				options: [
+					{ text: "Programas ou códigos maliciosos que podem roubar informações, espionar usuários ou causar danos.", correct: true, reason: "Correto. Malware é o termo geral para software ou código criado para comprometer dispositivos ou dados." },
+					{ text: "Qualquer atualização oficial do sistema operacional.", correct: false, reason: "Atualizações oficiais corrigem falhas; não são, por definição, programas maliciosos." },
+					{ text: "Mensagens legítimas enviadas por bancos para confirmar uma compra.", correct: false, reason: "Isso descreve uma comunicação legítima, não uma categoria de software malicioso." },
+					{ text: "Somente vírus que apagam arquivos, sem outros tipos de ameaça.", correct: false, reason: "Malware inclui vários tipos, como ransomware, keyloggers, spyware e worms, além de vírus." }
+				]
+			},
+			{
+				type: "multiple",
+				prompt: "Quais destes são exemplos de malware?",
+				hint: "Selecione todas as alternativas corretas.",
+				options: [
+					{ text: "Vírus", correct: true, reason: "Vírus é um tipo de malware que pode se associar a arquivos ou programas." },
+					{ text: "Ransomware", correct: true, reason: "Ransomware é malware que pode bloquear ou criptografar arquivos e exigir pagamento." },
+					{ text: "Keylogger", correct: true, reason: "Keylogger registra teclas digitadas e pode capturar informações confidenciais." },
+					{ text: "Phishing", correct: false, reason: "Phishing é um golpe que tenta enganar a vítima para obter dados ou dinheiro, não uma categoria de malware." }
+				]
+			},
+			{
+				type: "choice",
+				prompt: "Qual é o objetivo central do phishing?",
+				options: [
+					{ text: "Usar mensagens ou páginas falsas que imitam fontes legítimas para enganar a pessoa e roubar dados ou dinheiro.", correct: true, reason: "Correto. Phishing tenta induzir a vítima a revelar informações, clicar em links ou fazer pagamentos." },
+					{ text: "Atualizar automaticamente os programas do computador.", correct: false, reason: "Atualizações corrigem software; phishing é uma tentativa de fraude." },
+					{ text: "Fazer cópias de segurança dos arquivos.", correct: false, reason: "Backups ajudam a recuperar dados; não são o objetivo do phishing." },
+					{ text: "Bloquear a tela quando o usuário se afasta.", correct: false, reason: "Bloquear a tela protege o acesso físico ao computador; phishing busca enganar a vítima." }
+				]
+			},
+			{
+				type: "multiple",
+				prompt: "Quais situações são exemplos de phishing?",
+				hint: "Selecione todas as alternativas corretas.",
+				options: [
+					{ text: "Um e-mail falso de banco ameaça bloquear a conta e pede que você acesse um link para confirmar a senha.", correct: true, reason: "A mensagem imita uma instituição e tenta obter credenciais por meio de um link." },
+					{ text: "Uma mensagem inesperada promete um prêmio e pede dados pessoais para liberar o resgate.", correct: true, reason: "A promessa de prêmio é usada para atrair a vítima e coletar informações." },
+					{ text: "Você abre o aplicativo oficial instalado e consulta o saldo sem fornecer dados por um link recebido.", correct: false, reason: "Acessar diretamente um aplicativo oficial conhecido, sem seguir um link suspeito, não é por si só phishing." },
+					{ text: "Uma cópia de segurança automática salva seus documentos em um serviço confiável.", correct: false, reason: "Esse é um procedimento de backup, não uma mensagem fraudulenta para roubar informações." }
+				]
+			},
+			{
+				type: "choice",
+				prompt: "Qual é o nome da técnica que manipula o comportamento humano para aplicar golpes?",
+				options: [
+					{ text: "Engenharia social", correct: true, reason: "Correto. A engenharia social explora emoções como medo, confiança ou urgência para induzir ações arriscadas." },
+					{ text: "Backup", correct: false, reason: "Backup é uma cópia de segurança dos dados." },
+					{ text: "Criptografia", correct: false, reason: "Criptografia protege informações transformando-as para que não sejam lidas sem autorização." },
+					{ text: "Atualização automática", correct: false, reason: "Atualização automática instala correções; não é uma técnica de manipulação." }
+				]
+			},
+			{
+				type: "match",
+				prompt: "Associe cada situação ao tipo de ameaça: malware, phishing ou engenharia social.",
+				hint: "Escolha uma classificação para cada situação.",
+				items: [
+					{
+						text: "Um programa registra as teclas digitadas para capturar senhas.",
+						answer: "Malware",
+						options: [
+							{ text: "Malware", reason: "Keyloggers são programas maliciosos que podem registrar teclas." },
+							{ text: "Phishing", reason: "Não há mensagem falsa tentando capturar dados; a ameaça descrita é um programa instalado." },
+							{ text: "Engenharia social", reason: "O cenário não descreve manipulação psicológica da vítima." }
+						]
+					},
+					{
+						text: "Um e-mail falso de uma loja direciona para uma página que imita o acesso oficial.",
+						answer: "Phishing",
+						options: [
+							{ text: "Malware", reason: "O cenário descreve uma mensagem e uma página falsas, não necessariamente um programa malicioso." },
+							{ text: "Phishing", reason: "Correto. A página imita uma fonte legítima para enganar quem a acessa." },
+							{ text: "Engenharia social", reason: "A manipulação pode fazer parte do golpe, mas o tipo descrito pela mensagem e página falsas é phishing." }
+						]
+					},
+					{
+						text: "Alguém liga fingindo ser do suporte técnico e pressiona você a revelar um código de acesso.",
+						answer: "Engenharia social",
+						options: [
+							{ text: "Malware", reason: "Nenhum programa malicioso foi descrito; o foco é convencer a pessoa a revelar um código." },
+							{ text: "Phishing", reason: "Phishing costuma usar mensagens ou páginas falsas para capturar dados; aqui, a técnica central é a manipulação por telefone." },
+							{ text: "Engenharia social", reason: "Correto. A pessoa se passa por alguém confiável e usa pressão para obter uma ação ou informação." }
+						]
+					}
+				]
+			},
+			{
+				type: "choice",
+				prompt: "Verdadeiro ou falso: um antivírus confiável ajuda a reduzir riscos, mas não oferece proteção absoluta.",
+				options: [
+					{ text: "Verdadeiro", correct: true, reason: "Correto. Antivírus é uma camada de proteção, mas deve ser combinado com atualizações e hábitos seguros." },
+					{ text: "Falso", correct: false, reason: "Nenhuma ferramenta garante proteção contra todas as ameaças; por isso a afirmação é verdadeira." }
+				]
+			},
+			{
+				type: "choice",
+				prompt: "Verdadeiro ou falso: se o computador ainda funciona normalmente, é seguro adiar indefinidamente as atualizações.",
+				options: [
+					{ text: "Verdadeiro", correct: false, reason: "Um sistema pode parecer funcionar normalmente e ainda ter falhas conhecidas sem correção." },
+					{ text: "Falso", correct: true, reason: "Correto. Atualizações corrigem falhas de segurança; instale-as pelas configurações ou canais oficiais." }
+				]
+			},
+			{
+				type: "choice",
+				prompt: "Você recebe um link inesperado dizendo que sua conta será bloqueada em poucos minutos. O que fazer?",
+				options: [
+					{ text: "Não clicar; acessar a conta pelo aplicativo ou endereço oficial e confirmar por um canal conhecido.", correct: true, reason: "Correto. Isso evita o link suspeito e permite verificar a mensagem diretamente com a instituição." },
+					{ text: "Clicar rapidamente, pois a urgência prova que a mensagem é verdadeira.", correct: false, reason: "A urgência é uma tática comum para impedir que a vítima verifique a mensagem." },
+					{ text: "Responder com sua senha para confirmar que você é o titular.", correct: false, reason: "Não compartilhe sua senha por mensagens; instituições legítimas não precisam que você a envie dessa forma." },
+					{ text: "Encaminhar a mensagem para outras pessoas para perguntar se o link funciona.", correct: false, reason: "Compartilhar o link pode expor outras pessoas ao golpe; verifique por um canal oficial." }
+				]
+			},
+			{
+				type: "choice",
+				prompt: "Qual prática ajuda a proteger suas contas?",
+				options: [
+					{ text: "Usar senhas longas e exclusivas, guardá-las em um gerenciador e ativar autenticação de dois fatores quando disponível.", correct: true, reason: "Correto. Senhas exclusivas limitam o impacto de vazamentos, e o segundo fator adiciona uma camada de proteção." },
+					{ text: "Usar a mesma senha em todos os serviços para não esquecê-la.", correct: false, reason: "Se uma conta for comprometida, a mesma senha pode ser testada em outros serviços." },
+					{ text: "Usar uma senha curta baseada na data de nascimento.", correct: false, reason: "Datas de nascimento são previsíveis e senhas curtas podem ser mais fáceis de adivinhar." },
+					{ text: "Compartilhar a senha com colegas para ter uma cópia de segurança.", correct: false, reason: "Compartilhar credenciais aumenta o número de pessoas e situações que podem expô-las." }
+				]
+			},
+			{
+				type: "choice",
+				prompt: "Qual é a forma mais segura de instalar um programa?",
+				options: [
+					{ text: "Baixá-lo pelo site oficial do desenvolvedor ou por uma loja confiável, mantendo a proteção ativa.", correct: true, reason: "Correto. Fontes oficiais reduzem o risco de baixar instaladores modificados ou falsos." },
+					{ text: "Usar qualquer anúncio que prometa uma versão paga gratuitamente.", correct: false, reason: "Anúncios podem imitar botões de download ou oferecer instaladores adulterados." },
+					{ text: "Desativar o antivírus sempre que um instalador pedir.", correct: false, reason: "Desativar a proteção remove uma barreira importante e é um sinal de alerta." },
+					{ text: "Instalar uma versão pirata se o arquivo tiver muitas avaliações positivas.", correct: false, reason: "Avaliações não comprovam a segurança do arquivo; versões piratas podem conter malware." }
+				]
+			},
+			{
+				type: "choice",
+				prompt: "Qual cuidado é recomendado ao usar uma rede Wi-Fi pública?",
+				options: [
+					{ text: "Confirmar o nome da rede com o estabelecimento e evitar operações sensíveis se não confiar nela.", correct: true, reason: "Correto. Redes falsas podem imitar redes legítimas; confirme o nome e evite expor dados sensíveis." },
+					{ text: "Acessar qualquer link enviado para liberar a conexão.", correct: false, reason: "Links inesperados podem levar a páginas fraudulentas ou downloads perigosos." },
+					{ text: "Ignorar avisos do navegador para conseguir abrir o site.", correct: false, reason: "Avisos de segurança podem indicar riscos; não os ignore para prosseguir." },
+					{ text: "Considerar seguro qualquer site que mostre o cadeado HTTPS.", correct: false, reason: "HTTPS protege a conexão, mas não comprova que o site pertence a uma organização legítima." }
+				]
+			},
+			{
+				type: "choice",
+				prompt: "Como os backups ajudam a proteger seus arquivos contra perda ou ransomware?",
+				options: [
+					{ text: "Mantendo cópias periódicas, protegidas e, quando possível, desconectadas do computador; também é importante testar a recuperação.", correct: true, reason: "Correto. Cópias separadas podem ajudar a recuperar arquivos se os originais forem perdidos ou criptografados." },
+					{ text: "Mantendo todos os arquivos apenas na mesma pasta do computador.", correct: false, reason: "Se o dispositivo falhar ou for comprometido, os arquivos originais e a única cópia podem ser perdidos juntos." },
+					{ text: "Confiando apenas na sincronização, pois ela sempre preserva versões antigas.", correct: false, reason: "Sincronização pode replicar exclusões ou alterações; verifique histórico de versões e mantenha cópias de segurança." },
+					{ text: "Fazendo uma cópia uma única vez e nunca verificando se ela pode ser restaurada.", correct: false, reason: "Backups precisam ser periódicos e testados para confirmar que os arquivos podem ser recuperados." }
+				]
+			},
+			{
+				type: "choice",
+				prompt: "Você encontra um pendrive desconhecido em um espaço compartilhado. O que fazer?",
+				options: [
+					{ text: "Não conectá-lo e entregá-lo à equipe responsável ou ao suporte de TI.", correct: true, reason: "Correto. Um dispositivo desconhecido pode conter arquivos ou mecanismos maliciosos." },
+					{ text: "Conectá-lo para descobrir quem é o dono.", correct: false, reason: "Conectar o dispositivo pode expor o computador a malware." },
+					{ text: "Abrir os arquivos se o nome parecer conhecido.", correct: false, reason: "O nome dos arquivos não comprova que são seguros; não use um dispositivo de origem desconhecida." },
+					{ text: "Desativar o antivírus antes de conectá-lo, para evitar falsos alertas.", correct: false, reason: "Desativar a proteção aumenta o risco e não torna o dispositivo seguro." }
+				]
+			}
+		];
+
+		const form = document.querySelector("#quiz-form");
+		const questionList = document.querySelector("#question-list");
+		const progress = document.querySelector("#progress");
+		const formMessage = document.querySelector("#form-message");
+		const result = document.querySelector("#result");
+		let submitted = false;
+
+		function renderQuestions() {
+			questionList.innerHTML = questions.map((question, questionIndex) => {
+				const number = questionIndex + 1;
+				const hint = question.hint ? `<p class="question-hint">${question.hint}</p>` : "";
+				let content;
+
+				if (question.type === "match") {
+					content = `<div class="match-list">${question.items.map((item, itemIndex) => `
+						<fieldset class="match-item" data-match-item="${itemIndex}">
+							<legend><h3>${item.text}</h3></legend>
+							<div class="options">${item.options.map((option, optionIndex) => `
+								<label class="option">
+									<input type="radio" name="q${number}-item${itemIndex}" value="${optionIndex}" aria-label="${option.text}">
+									<span>${option.text}</span>
+								</label>`).join("")}
+							</div>
+							<div class="match-review"></div>
+						</fieldset>`).join("")}</div>`;
+				} else {
+					const inputType = question.type === "multiple" ? "checkbox" : "radio";
+					content = `<fieldset><legend class="question-hint">${question.type === "multiple" ? "Alternativas" : "Escolha uma alternativa"}</legend>
+						<div class="options">${question.options.map((option, optionIndex) => `
+							<label class="option">
+								<input type="${inputType}" name="q${number}" value="${optionIndex}" aria-label="${option.text}">
+								<span>${option.text}</span>
+							</label>`).join("")}
+						</div></fieldset>`;
+				}
+
+				return `<article class="question-card" data-question="${questionIndex}">
+					<h2><span class="question-number">Questão ${number}</span>${question.prompt}</h2>
+					${hint}${content}
+					<div class="question-feedback"></div>
+				</article>`;
+			}).join("");
+		}
+
+		function isQuestionAnswered(question, questionIndex) {
+			if (question.type === "match") {
+				return question.items.every((_, itemIndex) => form.querySelector(`input[name="q${questionIndex + 1}-item${itemIndex}"]:checked`));
+			}
+			return Boolean(form.querySelector(`input[name="q${questionIndex + 1}"]:checked`));
+		}
+
+		function updateProgress() {
+			const answered = questions.filter(isQuestionAnswered).length;
+			progress.textContent = `${answered} de ${questions.length} questões respondidas`;
+		}
+
+		function renderChoiceReview(question, questionIndex, selectedOptions) {
+			const correctOptions = question.options.filter((option) => option.correct);
+			const isCorrect = correctOptions.length === selectedOptions.length &&
+				correctOptions.every((option) => selectedOptions.includes(question.options.indexOf(option)));
+			const feedback = form.querySelector(`[data-question="${questionIndex}"] .question-feedback`);
+			const correctText = correctOptions.map((option) => option.text).join("; ");
+			const selectionText = selectedOptions.length
+				? `Você selecionou ${selectedOptions.map((index) => question.options[index].text).join("; ")}.`
+				: "Você não selecionou uma alternativa.";
+
+			feedback.innerHTML = `<div class="feedback ${isCorrect ? "" : "is-incorrect"}">
+				<strong>${isCorrect ? "Resposta correta!" : "Resposta incorreta."}</strong>
+				<span>Resposta correta: ${correctText}</span><br>
+				<span>${selectionText}</span>
+			</div>
+			<ul class="option-review">${question.options.map((option, optionIndex) => {
+				const selected = selectedOptions.includes(optionIndex);
+				const className = option.correct ? "is-correct" : selected ? "is-selected-incorrect" : "";
+				const label = option.correct ? "Correta" : selected ? "Sua escolha — incorreta" : "Incorreta";
+				return `<li class="${className}"><strong>${label}:</strong> ${option.text} ${option.reason}</li>`;
+			}).join("")}</ul>`;
+			return isCorrect;
+		}
+
+		function renderMatchReview(question, questionIndex) {
+			const card = form.querySelector(`[data-question="${questionIndex}"]`);
+			let correctCount = 0;
+			question.items.forEach((item, itemIndex) => {
+				const selected = Number(form.querySelector(`input[name="q${questionIndex + 1}-item${itemIndex}"]:checked`).value);
+				const selectedOption = item.options[selected];
+				const correctOption = item.options.find((option) => option.text === item.answer);
+				const isCorrect = selectedOption.text === item.answer;
+				if (isCorrect) correctCount += 1;
+				const review = card.querySelector(`[data-match-item="${itemIndex}"] .match-review`);
+				review.innerHTML = `<p class="match-feedback ${isCorrect ? "" : "is-incorrect"}">
+					<strong>${isCorrect ? "Correto!" : `Incorreto. Resposta correta: ${item.answer}.`}</strong>
+					${correctOption.reason}
+					${isCorrect ? "" : `<br><strong>Por que sua escolha estava errada:</strong> ${selectedOption.reason}`}
+				</p>`;
+			});
+			const isCorrect = correctCount === question.items.length;
+			card.querySelector(".question-feedback").innerHTML = `<div class="feedback ${isCorrect ? "" : "is-incorrect"}">
+				<strong>${isCorrect ? "Você acertou todas as associações!" : `Você acertou ${correctCount} de ${question.items.length} associações.`}</strong>
+				${isCorrect ? "Cada situação foi associada ao tipo de ameaça correspondente." : "Confira a explicação de cada situação e a classificação correta acima."}
+			</div>`;
+			return isCorrect;
+		}
+
+		function showResult(score) {
+			const percentage = Math.round((score / questions.length) * 100);
+			let message;
+			if (score === questions.length) {
+				message = "Excelente! Você demonstrou domínio dos conceitos e das medidas de prevenção.";
+			} else if (score >= 11) {
+				message = "Muito bom! Revise as explicações das questões que errou para reforçar seus conhecimentos.";
+			} else if (score >= 7) {
+				message = "Bom começo! Releia os materiais da trilha e confira as justificativas das respostas.";
+			} else {
+				message = "Continue aprendendo! Revise os materiais da trilha e tente novamente.";
+			}
+			result.innerHTML = `<h2>Seu resultado: ${score} de ${questions.length} (${percentage}%)</h2><p>${message}</p>`;
+			result.hidden = false;
+		}
+
+		renderQuestions();
+		form.addEventListener("change", updateProgress);
+		form.addEventListener("submit", (event) => {
+			event.preventDefault();
+			if (submitted) return;
+
+			const unansweredIndex = questions.findIndex((question, index) => !isQuestionAnswered(question, index));
+			if (unansweredIndex !== -1) {
+				formMessage.textContent = `Responda todas as questões antes de ver o resultado. Falta responder à questão ${unansweredIndex + 1}.`;
+				formMessage.hidden = false;
+				form.querySelector(`[data-question="${unansweredIndex}"]`).scrollIntoView({ behavior: "smooth", block: "center" });
+				form.querySelector(`[data-question="${unansweredIndex}"] input:not(:disabled)`).focus({ preventScroll: true });
+				return;
+			}
+
+			formMessage.hidden = true;
+			let score = 0;
+			questions.forEach((question, questionIndex) => {
+				let isCorrect;
+				if (question.type === "match") {
+					isCorrect = renderMatchReview(question, questionIndex);
+				} else {
+					const selectedOptions = [...form.querySelectorAll(`input[name="q${questionIndex + 1}"]:checked`)].map((input) => Number(input.value));
+					isCorrect = renderChoiceReview(question, questionIndex, selectedOptions);
+				}
+				if (isCorrect) score += 1;
+			});
+
+			submitted = true;
+			form.querySelectorAll("input").forEach((input) => { input.disabled = true; });
+			form.querySelector('button[type="submit"]').disabled = true;
+			showResult(score);
+			result.scrollIntoView({ behavior: "smooth", block: "center" });
+		});
+
+		form.addEventListener("reset", () => {
+			window.setTimeout(() => {
+				submitted = false;
+				formMessage.hidden = true;
+				result.hidden = true;
+				result.innerHTML = "";
+				form.querySelectorAll("input").forEach((input) => { input.disabled = false; });
+				form.querySelector('button[type="submit"]').disabled = false;
+				form.querySelectorAll(".question-feedback, .match-review").forEach((element) => { element.innerHTML = ""; });
+				updateProgress();
+				document.querySelector("#page-title").focus();
+			}, 0);
+		});
+	</script>
+</body>
+</html>
