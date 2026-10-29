@@ -152,7 +152,7 @@ A trilha foi estruturada para conduzir o participante desde a compreensão dos c
 
 | Etapa | Objetivo pedagógico | Material | Status |
 |---|---|---|---|
-| 1. Conhecer | Compreender os principais riscos digitais. | 🎬 Vídeo curto | 📋 Planejado |
+| 1. Conhecer | Compreender os principais riscos digitais. | 🎬 Vídeo curto | ✅ Concluído |
 | 2. Aprender | Conhecer boas práticas de proteção. | 📖 Texto educativo | ✅ Concluído |
 | 3. Reconhecer | Analisar situações reais de risco. | 🧩 Caso prático | ✅ Concluído |
 | 4. Praticar | Identificar ameaças e propor soluções. | 🎯 Desafio | ✅ Concluído |
