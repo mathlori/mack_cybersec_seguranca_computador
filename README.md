@@ -117,6 +117,8 @@ O quiz inclui questões de múltipla escolha, seleção de mais de uma alternati
 
 Use esta lista regularmente. Se algum item não estiver em ordem, corrija-o antes de continuar ou peça ajuda a alguém de confiança.
 
+**📄 Versão interativa para preencher e imprimir:** [6 Checklist - Segurança no Computador.html](./6%20Checklist%20-%20Seguran%C3%A7a%20no%20Computador.html)
+
 ### Proteção do dispositivo
 
 - [ ] 🔄 Instale atualizações do sistema operacional e dos programas pelos canais oficiais.

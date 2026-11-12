@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#a6192e">
+	<title>Checklist | Segurança no Computador</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--red: #a6192e;
+			--red-dark: #741326;
+			--red-pale: #fae9ec;
+			--ink: #272324;
+			--muted: #6f6869;
+			--line: #e7dfe0;
+			--green: #176b48;
+		}
+
+		* { box-sizing: border-box; }
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: radial-gradient(ellipse at 8% 12%, #f8e8e9 0, transparent 34rem), #fffdfc;
+			font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+			line-height: 1.55;
+		}
+
+		button, input { font: inherit; }
+		button { cursor: pointer; }
+		.topbar {
+			min-height: 66px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 18px;
+			padding: 12px clamp(18px, 5vw, 72px);
+			border-bottom: 4px solid var(--red-dark);
+			color: #fff;
+			background: var(--red);
+		}
+		.brand, .topbar-note { display: flex; align-items: center; gap: 10px; }
+		.brand { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+		.brand-mark { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid #ffffff9c; border-radius: 50%; }
+		.topbar-note { font-size: 12px; font-weight: 700; }
+
+		main { width: min(940px, calc(100% - 36px)); margin: 0 auto; padding: 44px 0 60px; }
+		.intro { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 28px; }
+		.eyebrow { margin: 0 0 9px; color: var(--red); font-size: 12px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+		h1, h2, h3, p { margin-top: 0; }
+		h1 { max-width: 700px; margin-bottom: 11px; font: 500 clamp(34px, 5vw, 55px)/1.04 Georgia, "Times New Roman", serif; }
+		.intro-copy { max-width: 690px; margin: 0; color: var(--muted); font-size: 16px; }
+		.module-stamp { flex: 0 0 auto; padding: 10px 14px; border-left: 2px solid var(--red); color: var(--muted); font-size: 12px; }
+		.module-stamp strong { display: block; color: var(--ink); font-size: 14px; }
+
+		.progress-card { margin: 28px 0 16px; padding: 15px 18px; border: 1px solid var(--line); border-radius: 5px; background: #fff; }
+		.progress-copy { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; font-size: 13px; }
+		.progress-copy output { color: var(--red-dark); font-weight: 800; text-align: right; }
+		progress { width: 100%; height: 10px; overflow: hidden; border: 0; border-radius: 10px; accent-color: var(--red); }
+		progress::-webkit-progress-bar { border-radius: 10px; background: var(--red-pale); }
+		progress::-webkit-progress-value { border-radius: 10px; background: var(--red); }
+		progress::-moz-progress-bar { border-radius: 10px; background: var(--red); }
+
+		.checklist { display: grid; gap: 15px; }
+		.checklist-card { min-width: 0; padding: 20px; border: 1px solid var(--line); border-top: 3px solid var(--red); border-radius: 6px; background: #fff; box-shadow: 0 8px 24px #44121c0b; }
+		.checklist-card legend { margin-bottom: 13px; font-size: 17px; font-weight: 800; }
+		fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+		.checklist-items { display: grid; gap: 8px; }
+		.check-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 11px; border: 1px solid var(--line); border-radius: 4px; color: #393435; cursor: pointer; font-size: 13px; line-height: 1.45; }
+		.check-item:hover { border-color: #c8838e; background: #fffafb; }
+		.check-item:focus-within { outline: 3px solid #d99ba5; outline-offset: 2px; }
+		.check-item input { width: 17px; height: 17px; flex: 0 0 auto; margin: 1px 0 0; accent-color: var(--red); }
+		.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+		.action-button { padding: 11px 16px; border: 0; border-radius: 4px; color: #fff; background: var(--red); font-size: 13px; font-weight: 800; }
+		.action-button:hover { background: var(--red-dark); }
+		.action-button.secondary { border: 1px solid var(--line); color: var(--red-dark); background: #fff; }
+		.action-button.secondary:hover { border-color: #c8838e; background: #fffafb; }
+		.action-button:focus-visible { outline: 3px solid #d99ba5; outline-offset: 2px; }
+		.reminder { margin-top: 22px; padding: 15px 17px; border-left: 3px solid var(--red); color: #514a4b; background: #fffafb; font-size: 13px; }
+		.reminder strong { color: var(--red-dark); }
+		footer { padding: 17px 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; text-align: center; }
+
+		@media (max-width: 760px) {
+			main { padding-top: 32px; }
+			.intro { display: grid; gap: 14px; }
+			.module-stamp { justify-self: start; }
+		}
+		@media (max-width: 440px) {
+			.topbar { align-items: flex-start; }
+			.brand { font-size: 11px; }
+			.topbar-note { font-size: 10px; }
+			.progress-copy { align-items: flex-start; flex-direction: column; gap: 2px; }
+			.progress-copy output { text-align: left; }
+			.checklist-card { padding: 16px; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+		}
+		@media print {
+			body { background: #fff; }
+			.topbar { min-height: auto; padding: 10px 0; border-bottom-width: 2px; print-color-adjust: exact; }
+			main { width: 100%; padding: 22px 0; }
+			.intro { margin-bottom: 18px; }
+			.progress-card { margin: 15px 0; }
+			.checklist-card { break-inside: avoid; box-shadow: none; }
+			.actions { display: none; }
+			footer { padding: 10px 0; }
+		}
+	</style>
+</head>
+<body>
+	<header class="topbar">
+		<div class="brand">
+			<span class="brand-mark" aria-hidden="true">🔐</span>
+			<span>Segurança no Computador</span>
+		</div>
+		<div class="topbar-note">Material educativo</div>
+	</header>
+
+	<main>
+		<section class="intro" aria-labelledby="page-title">
+			<div>
+				<p class="eyebrow">Trilha de conhecimento · Material 6</p>
+				<h1 id="page-title">Antes de usar seu computador, confira!</h1>
+				<p class="intro-copy">Use esta lista regularmente para reforçar hábitos seguros. Marque cada item conforme verifica as configurações e práticas do seu dia a dia.</p>
+			</div>
+			<div class="module-stamp">
+				<strong>Checklist prático</strong>
+				14 recomendações
+			</div>
+		</section>
+
+		<section class="progress-card" aria-label="Progresso do checklist">
+			<div class="progress-copy">
+				<strong>Seu progresso</strong>
+				<output id="progress-label" for="checklist-progress" aria-live="polite">0 de 14 itens conferidos</output>
+			</div>
+			<progress id="checklist-progress" max="14" value="0" aria-label="Itens conferidos"></progress>
+		</section>
+
+		<form id="checklist" class="checklist">
+			<section class="checklist-card">
+				<fieldset>
+					<legend>Proteção do dispositivo</legend>
+					<div class="checklist-items">
+						<label class="check-item"><input type="checkbox"> <span>Instale atualizações do sistema operacional e dos programas pelos canais oficiais.</span></label>
+						<label class="check-item"><input type="checkbox"> <span>Verifique se o antivírus ou outra ferramenta de proteção está ativo e atualizado.</span></label>
+						<label class="check-item"><input type="checkbox"> <span>Mantenha o firewall do sistema ativado.</span></label>
+						<label class="check-item"><input type="checkbox"> <span>Configure o bloqueio de tela e bloqueie o computador ao se afastar.</span></label>
+						<label class="check-item"><input type="checkbox"> <span>Instale programas somente de lojas ou sites oficiais e remova aplicativos que não utiliza.</span></label>
+					</div>
+				</fieldset>
+			</section>
+
+			<section class="checklist-card">
+				<fieldset>
+					<legend>Proteção das contas e informações</legend>
+					<div class="checklist-items">
+						<label class="check-item"><input type="checkbox"> <span>Use senhas fortes e diferentes em cada conta; prefira um gerenciador de senhas confiável.</span></label>
+						<label class="check-item"><input type="checkbox"> <span>Ative a autenticação em dois fatores quando disponível e nunca compartilhe códigos de acesso.</span></label>
+						<label class="check-item"><input type="checkbox"> <span>Evite compartilhar dados pessoais ou conceder permissões a aplicativos sem necessidade.</span></label>
+						<label class="check-item"><input type="checkbox"> <span>Faça cópias de segurança dos arquivos importantes e confira se consegue recuperá-los.</span></label>
+					</div>
+				</fieldset>
+			</section>
+
+			<section class="checklist-card">
+				<fieldset>
+					<legend>Uso seguro no dia a dia</legend>
+					<div class="checklist-items">
+						<label class="check-item"><input type="checkbox"> <span>Confira o remetente e o endereço dos links antes de clicar; desconfie de mensagens urgentes ou inesperadas.</span></label>
+						<label class="check-item"><input type="checkbox"> <span>Não abra anexos nem baixe arquivos de origem desconhecida.</span></label>
+						<label class="check-item"><input type="checkbox"> <span>Em redes Wi-Fi públicas, evite acessar informações sensíveis; prefira uma conexão confiável.</span></label>
+						<label class="check-item"><input type="checkbox"> <span>Não conecte dispositivos USB desconhecidos.</span></label>
+						<label class="check-item"><input type="checkbox"> <span>Se notar algo suspeito, interrompa a ação e procure suporte técnico confiável.</span></label>
+					</div>
+				</fieldset>
+			</section>
+
+			<div class="actions">
+				<button class="action-button" type="button" id="print-checklist">Imprimir checklist</button>
+				<button class="action-button secondary" type="reset">Limpar marcações</button>
+			</div>
+		</form>
+
+		<aside class="reminder">
+			<strong>Lembre-se:</strong> nenhum checklist elimina todos os riscos. Se algo parecer suspeito, não prossiga e procure orientação de uma pessoa ou serviço de suporte confiável.
+		</aside>
+	</main>
+
+	<footer>Projeto de Extensão · Segurança Digital</footer>
+
+	<script>
+		const checklist = document.querySelector("#checklist");
+		const checkboxes = checklist.querySelectorAll('input[type="checkbox"]');
+		const progress = document.querySelector("#checklist-progress");
+		const progressLabel = document.querySelector("#progress-label");
+
+		function updateProgress() {
+			const checked = checklist.querySelectorAll('input[type="checkbox"]:checked').length;
+			progress.value = checked;
+			progressLabel.value = checked === checkboxes.length
+				? `Todos os ${checkboxes.length} itens conferidos`
+				: `${checked} de ${checkboxes.length} itens conferidos`;
+		}
+
+		checklist.addEventListener("change", updateProgress);
+		checklist.addEventListener("reset", () => requestAnimationFrame(updateProgress));
+		document.querySelector("#print-checklist").addEventListener("click", () => window.print());
+	</script>
+</body>
+</html>
