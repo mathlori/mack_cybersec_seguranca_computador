@@ -111,22 +111,34 @@ O quiz inclui questões de múltipla escolha, seleção de mais de uma alternati
 ## ☑️ 6. Checklist — "Antes de usar seu computador, confira!"
 
 - **Formato:** Lista prática para consulta.
-- **Status:** ⏳ Em desenvolvimento.
+- **Status:** ✅ Concluído.
 
 **📝 Conteúdo:**
 
-Lista de verificação com recomendações para incorporar hábitos seguros à rotina de utilização do computador.
+Use esta lista regularmente. Se algum item não estiver em ordem, corrija-o antes de continuar ou peça ajuda a alguém de confiança.
 
-O material incluirá ações como:
+### Proteção do dispositivo
 
-- [ ] 🔄 Verificar se o sistema operacional e os programas estão atualizados.
-- [ ] 🛡️ Conferir se as ferramentas de proteção estão funcionando.
-- [ ] 🔒 Bloquear a tela ao se afastar do computador.
-- [ ] 📧 Evitar abrir anexos e links suspeitos.
-- [ ] 💾 Manter cópias de segurança dos arquivos importantes.
-- [ ] 🔑 Utilizar senhas fortes e exclusivas.
-- [ ] 📥 Baixar programas somente de fontes confiáveis.
-- [ ] 👤 Evitar compartilhar contas e informações pessoais desnecessariamente.
+- [ ] 🔄 Instale atualizações do sistema operacional e dos programas pelos canais oficiais.
+- [ ] 🛡️ Verifique se o antivírus ou outra ferramenta de proteção está ativo e atualizado.
+- [ ] 🧱 Mantenha o firewall do sistema ativado.
+- [ ] 🔒 Configure o bloqueio de tela e bloqueie o computador ao se afastar.
+- [ ] 📥 Instale programas somente de lojas ou sites oficiais e remova aplicativos que não utiliza.
+
+### Proteção das contas e informações
+
+- [ ] 🔑 Use senhas fortes e diferentes em cada conta; prefira um gerenciador de senhas confiável.
+- [ ] 🔐 Ative a autenticação em dois fatores quando disponível e nunca compartilhe códigos de acesso.
+- [ ] 👤 Evite compartilhar dados pessoais ou conceder permissões a aplicativos sem necessidade.
+- [ ] 💾 Faça cópias de segurança dos arquivos importantes e confira se consegue recuperá-los.
+
+### Uso seguro no dia a dia
+
+- [ ] 🔗 Confira o remetente e o endereço dos links antes de clicar; desconfie de mensagens urgentes ou inesperadas.
+- [ ] 📎 Não abra anexos nem baixe arquivos de origem desconhecida.
+- [ ] 📶 Em redes Wi-Fi públicas, evite acessar informações sensíveis; prefira uma conexão confiável.
+- [ ] 🔌 Não conecte dispositivos USB desconhecidos.
+- [ ] 🚨 Se notar algo suspeito, interrompa a ação e procure suporte técnico confiável.
 
 ---
 
@@ -161,7 +173,7 @@ A trilha foi estruturada para conduzir o participante desde a compreensão dos c
 | 3. Reconhecer | Analisar situações reais de risco. | 🧩 Caso prático | ✅ Concluído |
 | 4. Praticar | Identificar ameaças e propor soluções. | 🎯 Desafio | ✅ Concluído |
 | 5. Avaliar | Verificar os conhecimentos adquiridos. | 📝 Quiz | ⏳ Em desenvolvimento |
-| 6. Aplicar | Incorporar hábitos seguros à rotina. | ☑️ Checklist | ⏳ Em desenvolvimento |
+| 6. Aplicar | Incorporar hábitos seguros à rotina. | ☑️ Checklist | ✅ Concluído |
 | 7. Consultar | Aprender a reagir a incidentes de segurança. | 🚨 Guia rápido | ⏳ Em desenvolvimento |
 
 ---
